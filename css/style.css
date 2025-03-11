@@ -1,3 +1,33 @@
+.solway-light {
+    font-family: "Solway", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.solway-regular {
+    font-family: "Solway", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.solway-medium {
+    font-family: "Solway", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.solway-bold {
+    font-family: "Solway", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.solway-extrabold {
+    font-family: "Solway", serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,4 +37,48 @@ body {
     background-color: bisque;
     width: 100%;
     height: 100%;
+}
+
+/* header */
+header {
+    background-color: rgba(245, 245, 220, 0.675);
+    height: 7vh;
+    width: 100%;
+}
+
+header nav {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    list-style: none;
+
+}
+
+header a {
+    cursor: pointer;
+    position: relative;
+    transition: ease .3 s;
+    text-decoration: none;
+    color: #010203;
+}
+
+header a::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    background: #010203;
+    transition: width .3s;
+}
+
+header a:hover::after {
+    width: 100%;
 }
