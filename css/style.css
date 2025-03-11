@@ -82,3 +82,7 @@ header a::after {
 header a:hover::after {
     width: 100%;
 }
+
+header img {
+    width: 3vw;
+}
