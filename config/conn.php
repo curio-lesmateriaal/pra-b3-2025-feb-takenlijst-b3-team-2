@@ -1,4 +1,5 @@
 <?php
+global $dbPass, $dbHost, $dbName, $dbUser;
 
 //Haal de configuratie op
 require_once 'config.php';
