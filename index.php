@@ -10,20 +10,18 @@ require_once 'config/config.php';
 
 <head>
     <title></title>
-    <?php require_once "$base_url/resources/views/head.php" ?>
+    <?php require_once "./resources/views/head.php"; ?>
 </head>
 
 <body>
 
-<?php require_once "$base_url/resources/views/header.php"; ?>
+<?php require_once "./resources/views/header.php"; ?>
 
 <div class="container">
-
-
-
+    
 </div>
 
-<?php require_once "$base_url/resources/views/footer.php"; ?>
+<?php require_once "./resources/views/footer.php"; ?>
 
 </body>
 
