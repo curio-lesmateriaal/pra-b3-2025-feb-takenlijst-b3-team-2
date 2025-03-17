@@ -1,0 +1,8 @@
+User-agent: *
+
+Disallow: /config/
+Disallow: /app/
+Disallow: /doc/
+Disallow: /important/
+
+Sitemap: https://www.example.com/sitemap.xml
