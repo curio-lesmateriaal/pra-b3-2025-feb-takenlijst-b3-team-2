@@ -3,9 +3,13 @@ global $conn, $base_url;
 
 require_once "../../../../config/conn.php";
 
-$username = $_POST['username'];
-$password = $_POST['password'];
-
+$username = isset($_POST['username']) ? $_POST['username'] : null;
+$password = isset($_POST['password']) ? $_POST['password'] : null;
+if($username == null or $password == null)
+{
+    header('location: '.$base_url.'/index.php');
+    die("Error: please fill out the form!");
+}
 $query = "SELECT * FROM users WHERE username = ':username'";
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':username', $username);

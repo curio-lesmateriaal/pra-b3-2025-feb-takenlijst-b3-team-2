@@ -3,14 +3,13 @@ global $conn, $base_url;
 
 require_once '../../../../config/conn.php';
 
-$username = $_POST["username"];
-$password = $_POST["password"];
-$email = $_POST["email"];
+$username = isset($_POST['username']) ? $_POST['username'] : null;
+$password = isset($_POST['password']) ? $_POST['password'] : null;
+$email = isset($_POST['email']) ? $_POST['email'] : null;
 
-if (!isset($username) or !isset($password) or !isset($email))
-{
-    header("Location: $base_url?error=emptyfields");
-    die("please fill out the form!");
+if ($username == null or $password == null or $email == null) {
+    header('location: ' . $base_url . '/index.php');
+    die("Error: please fill out the form!");
 }
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 $query = "INSERT INTO users (':username', ':password', ':email' ':creation_date')";
