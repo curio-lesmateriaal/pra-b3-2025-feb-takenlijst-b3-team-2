@@ -12,16 +12,16 @@ require_once './config/config.php';
     <main>
         <div class="forms">
             <form>
-                <h1><span>Log</span>in</h1>
+                <h1>Login</h1>
                 <div class="login">
                     <div class="user_info">
                         <div class="info">
                             <label for="email">E-mail:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required placeholder="Email address">
                         </div>
                         <div class="info">
                             <label for="password">Wachtwoord</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" required placeholder="Password">
                         </div>
                     </div>
                     <button type="submit">Login</button>
