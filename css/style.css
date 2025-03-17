@@ -41,6 +41,8 @@ body {
 
 /* header */
 header {
+    position: absolute;
+    top: 0;
     background-color: rgba(31, 0, 183, 0.273);
     height: 7vh;
     width: 100%;
@@ -80,4 +82,24 @@ header a:hover::after {
 
 header img {
     width: 3vw;
+}
+.footer{
+    position: absolute;
+    bottom: 2.5vh;
+    right: 2.5vh;
+}
+.full-size{
+    width: 100vw;
+    height: 100vh;
+}
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-col{
+    flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
 }

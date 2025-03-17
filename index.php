@@ -21,7 +21,7 @@ require_once 'config/config.php';
     
 </div>
 
-<?php require_once "./resources/views/footer.php"; ?>
+<?php require_once "./resources/views/footer    .php"; ?>
 
 </body>
 
