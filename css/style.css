@@ -34,14 +34,14 @@
 }
 
 body {
-    background-color: bisque;
+    background-color: rgba(255, 255, 255, 0.937);
     width: 100%;
     height: 100%;
 }
 
 /* header */
 header {
-    background-color: rgba(245, 245, 220, 0.675);
+    background-color: rgba(31, 0, 183, 0.273);
     height: 7vh;
     width: 100%;
 }
@@ -50,14 +50,9 @@ header nav {
     height: 7vh;
     display: flex;
     align-items: center;
-}
-
-header nav ul {
-    display: flex;
     width: 100%;
     justify-content: space-evenly;
     list-style: none;
-
 }
 
 header a {
@@ -71,7 +66,7 @@ header a {
 header a::after {
     content: '';
     position: absolute;
-    height: 2px;
+    height: 1.5px;
     width: 0;
     left: 0;
     bottom: 0;
