@@ -10,15 +10,25 @@ require_once './config/config.php';
 <body class="full-size flex-container flex-column">
     <?php require_once "./resources/views/header.php"; ?>
     <main>
-        <form>
-            <label for="username">Gebruikersnaam:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
-        </form>
+        <div class="forms">
+            <form>
+                <h1><span>Log</span>in</h1>
+                <div class="login">
+                    <div class="user_info">
+                        <div class="info">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="info">
+                            <label for="password">Wachtwoord</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <button type="submit">Login</button>
+                </div>
+                <p>Heb je nog geen account? <a href="#">Registreer</a></p>
+            </form>
+        </div>
     </main>
     <?php require_once "./resources/views/footer.php" ?>
 </body>
