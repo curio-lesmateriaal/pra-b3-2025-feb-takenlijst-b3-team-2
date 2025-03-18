@@ -88,6 +88,7 @@ header img {
 
 /*login*/
 .forms {
+.forms {
     display: flex;
     justify-content: flex-end;
 
@@ -221,7 +222,7 @@ footer p {
 
 .column {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 30%;
     height: 90%;
     background-color: #F5F3F5;
@@ -229,6 +230,8 @@ footer p {
     box-shadow: 1px 1px 10px black;
     padding: 1rem;
     margin: 0 2vw;
+    flex-direction: column;
+    align-items: center;
 }
 
 .taken {
@@ -239,9 +242,7 @@ footer p {
 
 .container {
     height: 90vh;
-}
 
-.container {
     width: 70%;
     margin: 0 auto;
     display: flex;
