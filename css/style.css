@@ -62,7 +62,7 @@ header nav {
 header a {
     cursor: pointer;
     position: relative;
-    transition: ease .3 s;
+    transition: ease .3s;
     text-decoration: none;
     color: #F5F3F5;
 }
@@ -110,7 +110,28 @@ form
 
 form a
 {
+    cursor: pointer;
+    position: relative;
+    transition: ease .3s;
     text-decoration: none;
+    color: #1a73e8;
+}
+
+form a::after
+{
+    content: '';
+    position: absolute;
+    height: 1.5px;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    background: #1a73e8;
+    transition: width .3s;
+}
+
+form a:hover::after
+{
+    width: 100%;
 }
 
 .login
@@ -155,9 +176,19 @@ form p
 }
 /*footer*/
 footer{
-    position: absolute;
-    bottom: 2.5vh;
-    right: 2.5vh;
+    height: 3vh;
+    width: 100%;
+    background-color: #0C8383;
+    color: #F5F3F5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+footer p
+{
+    margin-right: 2%;
 }
 
 .full-size {
@@ -211,4 +242,9 @@ footer{
     list-style: none;
     display: flex;
     flex-direction: column;
+}
+
+.container
+{
+    height: 90vh;
 }
