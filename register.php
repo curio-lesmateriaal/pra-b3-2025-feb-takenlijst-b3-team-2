@@ -12,10 +12,14 @@ require_once './config/config.php';
     <?php require_once "./resources/views/header.php"; ?>
     <main>
         <div class="forms">
-            <form action="<?php echo $base_url; ?>/app/Http/Controlers/Auth/registercontroller.php" method="post">
+            <form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/registercontroller.php" method="post">
                 <h1>Login</h1>
                 <div class="login">
                     <div class="user_info">
+                        <div class="info">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" required placeholder="Username">
+                        </div>
                         <div class="info">
                             <label for="email">E-mail:</label>
                             <input type="email" id="email" name="email" required placeholder="Email address">
