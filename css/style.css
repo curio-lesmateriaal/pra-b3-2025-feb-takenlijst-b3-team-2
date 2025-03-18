@@ -41,9 +41,7 @@ body {
 
 /* header */
 header {
-    background-color: rgba(31, 0, 183, 0.273);
-    top: 0;
-
+    background-color: #0C8383;
     height: 7vh;
     width: 100%;
     box-shadow: 1px 0px 10px black;
@@ -135,7 +133,8 @@ form a
     margin-top: 5px;
 }
 /*footer*/
-footer
-{
-    height: 3vh;
+footer{
+    position: absolute;
+    bottom: 2.5vh;
+    right: 2.5vh;
 }
