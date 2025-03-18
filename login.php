@@ -7,7 +7,7 @@ require_once './config/config.php';
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once "./resources/views/head.php" ?>
-<body class="">
+<body>
     <?php require_once "./resources/views/header.php"; ?>
     <main>
         <div class="forms">
