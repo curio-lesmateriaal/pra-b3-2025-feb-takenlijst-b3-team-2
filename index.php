@@ -15,13 +15,17 @@ require_once 'config/config.php';
 
 <body>
 
-<?php require_once "./resources/views/header.php"; ?>
+    <?php require_once "./resources/views/header.php"; ?>
 
-<div class="container">
-    
-</div>
+    <div class="container">
 
-<?php require_once "./resources/views/footer.php"; ?>
+        <div>
+            <img src="./resources/img/logo.png" alt="big-logo">
+            <h2>Welkom bij de Developer Land to-do app!</h2>
+        </div>
+    </div>
+
+    <?php require_once "./resources/views/footer.php"; ?>
 
 </body>
 
