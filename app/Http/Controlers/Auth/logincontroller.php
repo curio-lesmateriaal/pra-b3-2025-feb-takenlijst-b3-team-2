@@ -6,7 +6,7 @@ require_once "../../../../config/conn.php";
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = "SELECT * FROM users WHERE username = ':email'";
+$query = "SELECT * FROM users WHERE email = ':email'";
 $stmt = $conn->prepare($query);
 $stmt->execute
 ([
@@ -23,8 +23,8 @@ if ($user->rowCount() == 0 or !password_verify($password, $user['password']))
 session_start();
 
 $_SESSION['id'] = $user['id'];
-$_SESSION['usr'] = $user['username'];
+$_SESSION['username'] = $user['username'];
+$_SESSION['is_logged_in'] = true;
 
-// TODO add a header to where the user page will be
-
+header('location: '.$base_url.'/index.php');
 exit;
