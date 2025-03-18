@@ -7,11 +7,12 @@ require_once './config/config.php';
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once "./resources/views/head.php" ?>
+
 <body class="">
     <?php require_once "./resources/views/header.php"; ?>
     <main>
         <div class="forms">
-            <form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/logincontroller.php" method="post">
+            <form action="<?php echo $base_url; ?>/app/Http/Controlers/Auth/registercontroller.php" method="post">
                 <h1>Login</h1>
                 <div class="login">
                     <div class="user_info">
@@ -24,7 +25,7 @@ require_once './config/config.php';
                             <input type="password" id="password" name="password" required placeholder="Password">
                         </div>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit">register</button>
                 </div>
                 <p>Heb je nog geen account? <a href="#">Registreer</a></p>
             </form>
@@ -32,4 +33,5 @@ require_once './config/config.php';
     </main>
     <?php require_once "./resources/views/footer.php" ?>
 </body>
+
 </html>
