@@ -19,11 +19,11 @@ require_once 'config/config.php';
     <?php require_once "./resources/views/header.php"; ?>
 
     <div class="container">
-
-        <div>
-            <img src="./resources/img/logo.png" alt="big-logo">
-            <h2>Welkom bij de Developer Land to-do app!</h2>
-        </div>
+        <img src="./resources/img/logo.png" alt="big-logo">
+        <h2>Bouw je workflow, beheer je taken – Developer Land To-Do.</h2>
+        <p>Welkom bij Developer Land To-Do, dé plek waar je projecten georganiseerd en productief blijven. Sleep,
+            sorteer en voltooi taken met gemak, net zoals in Trello – maar dan speciaal voor jouw team. Werk slimmer,
+            niet harder! 🚀</p>
     </div>
 
     <?php require_once "./resources/views/footer.php"; ?>

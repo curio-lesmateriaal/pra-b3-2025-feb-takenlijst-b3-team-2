@@ -87,16 +87,14 @@ header img {
 }
 
 /*login*/
-.forms
-{
+.forms {
     display: flex;
     justify-content: flex-end;
 
     background-color: #1B264F;
 }
 
-form
-{
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,8 +106,7 @@ form
     width: 30%;
 }
 
-form a
-{
+form a {
     cursor: pointer;
     position: relative;
     transition: ease .3s;
@@ -117,8 +114,7 @@ form a
     color: #1a73e8;
 }
 
-form a::after
-{
+form a::after {
     content: '';
     position: absolute;
     height: 1.5px;
@@ -129,13 +125,11 @@ form a::after
     transition: width .3s;
 }
 
-form a:hover::after
-{
+form a:hover::after {
     width: 100%;
 }
 
-.login
-{
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,8 +141,7 @@ form a:hover::after
     padding: 3vh 2vh;
 }
 
-.login input
-{
+.login input {
     border: none;
     outline: none;
 
@@ -158,8 +151,7 @@ form a:hover::after
     margin-top: 5px;
 }
 
-form button
-{
+form button {
     border: none;
     outline: none;
     padding: 1vh 2vh;
@@ -169,13 +161,14 @@ form button
     background-color: #0C8383;
     align-self: flex-start;
 }
-form p
-{
+
+form p {
     text-align: center;
     margin-top: 10px;
 }
+
 /*footer*/
-footer{
+footer {
     height: 3vh;
     width: 100%;
     background-color: #0C8383;
@@ -186,8 +179,7 @@ footer{
 
 }
 
-footer p
-{
+footer p {
     margin-right: 2%;
 }
 
@@ -238,13 +230,26 @@ footer p
     padding: 1rem;
     margin: 0 2vw;
 }
-.taken{
+
+.taken {
     list-style: none;
     display: flex;
     flex-direction: column;
 }
 
-.container
-{
+.container {
     height: 90vh;
+}
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container p {
+    margin-top: 5vh;
+    max-width: 85%;
 }
