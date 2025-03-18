@@ -1,4 +1,5 @@
 <?php
+session_start();
 global $base_url;
 
 require_once 'config/config.php';
