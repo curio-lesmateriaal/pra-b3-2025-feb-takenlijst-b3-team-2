@@ -133,6 +133,23 @@ form a
     margin-bottom: 10px;
     margin-top: 5px;
 }
+
+form button
+{
+    border: none;
+    outline: none;
+    padding: 1vh 2vh;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background-color: #0C8383;
+    align-self: flex-start;
+}
+form p
+{
+    text-align: center;
+    margin-top: 10px;
+}
 /*footer*/
 footer{
     position: absolute;
