@@ -36,8 +36,8 @@ require_once './config/config.php';
                 <div class="login">
                     <div class="user_info">
                         <div class="info">
-                            <label for="name">Naam:</label>
-                            <input type="text" id="name" name="name" required placeholder="Naam">
+                            <label for="name">Username:</label>
+                            <input type="text" id="name" name="username" required placeholder="Naam">
                         </div>
                         <div class="info">
                             <label for="email">E-mail:</label>
