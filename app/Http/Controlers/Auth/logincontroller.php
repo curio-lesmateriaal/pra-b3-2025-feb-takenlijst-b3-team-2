@@ -3,14 +3,14 @@ global $conn, $base_url;
 
 require_once "../../../../config/conn.php";
 
-$username = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = "SELECT * FROM users WHERE username = ':username'";
+$query = "SELECT * FROM users WHERE username = ':email'";
 $stmt = $conn->prepare($query);
 $stmt->execute
 ([
-    ':username' => $username,
+    ':email' => $email,
 ]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
