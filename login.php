@@ -9,7 +9,7 @@ require_once './config/config.php';
 <html lang="en">
 <script src="resources/scripts/switch.ts"></script>
 <?php require_once "./resources/views/head.php" ?>
-<body class="">
+<body>
     <?php require_once "./resources/views/header.php"; ?>
     <main>
         <div class="forms">
