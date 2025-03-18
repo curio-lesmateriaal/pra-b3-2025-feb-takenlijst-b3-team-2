@@ -7,7 +7,7 @@ require_once './config/config.php';
 
 <!DOCTYPE html>
 <html lang="en">
-<script src="resources/scripts/switch.ts"></script>
+<script src="resources/scripts/switch.js"></script>
 <?php require_once "./resources/views/head.php" ?>
 <body>
     <?php require_once "./resources/views/header.php"; ?>
@@ -48,7 +48,7 @@ require_once './config/config.php';
                         </div>
                     </div>
                     <button type="submit">Registreer</button>
-                    <p>Heb je al een account? <a href="#" id="toggle">Login</a></p>
+                    <p>Heb je al een account? <a href="?register" id="toggle">Login</a></p>
                 </div>
             </form>
         </div>
