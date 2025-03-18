@@ -13,7 +13,7 @@ if ($username == null or $password == null or $email == null) {
     die("Error: please fill out the form!");
 }
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
-$query = "INSERT INTO users (`email`,`username`, `password`) VALUES (:username, :password, :email)";
+$query = "INSERT INTO users (`email`,`username`, `password`) VALUES (:email,:username ,:password)";
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':username', $username);
 $stmt->bindParam(':password',$password_hash);

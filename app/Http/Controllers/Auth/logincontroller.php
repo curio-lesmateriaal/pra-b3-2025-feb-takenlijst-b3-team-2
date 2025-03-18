@@ -24,10 +24,9 @@ if ($stmt->rowCount() == 0 or !password_verify($password, $user['password']))
     die("Error: Invalid username or password");
 }
 
-
 $_SESSION['id'] = $user['id'];
 $_SESSION['username'] = $user['username'];
 $_SESSION['is_logged_in'] = true;
-
+error_log("Session is_logged_in: " . $_SESSION['is_logged_in']);
 header('location: '.$base_url.'/index.php');
 exit;

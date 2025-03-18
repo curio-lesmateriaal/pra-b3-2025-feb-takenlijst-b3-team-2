@@ -1,8 +1,11 @@
 <?php
 session_start();
-if(!$_SESSION['is_logged_in']){
-    header('Location: login.php');
-    exit();
+if(!isset($_SESSION['is_logged_in'])){
+    $_SESSION['is_logged_in'] = false;
+}
+if($_SESSION['is_logged_in'] == false){
+    header('location: '.$base_url.'/login.php');
+    exit;
 }
 global $base_url;
 require_once 'config/config.php';
