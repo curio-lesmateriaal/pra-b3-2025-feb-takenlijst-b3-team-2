@@ -1,22 +1,24 @@
 <?php
+global $base_url;
+
+require_once 'config/config.php';
+
 session_start();
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
+
 if ($_SESSION['is_logged_in'] == false) {
     header('location: ' . $base_url . '/login.php');
     exit;
 }
-global $base_url;
-require_once 'config/config.php';
-
 ?>
 
 <!doctype html>
 <html lang="nl">
 
 <head>
-    <title></title>
+    <title>taken</title>
     <?php require_once "./resources/views/head.php"; ?>
 </head>
 
