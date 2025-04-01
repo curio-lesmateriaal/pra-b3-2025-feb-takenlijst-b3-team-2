@@ -29,27 +29,49 @@ require_once 'config/config.php';
             <div class="column">
                 <h2>To-do</h2>
                 <ul class="taken">
-                    <li>Taak1</li>
-                    <li>Taak2</li>
+                    <?php
+                    foreach($tasks as $task) {
+                        if ($task['status'] == 'To-do') {
+                            echo "<li>" . $task['name'] . "</li>";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="column">
                 <h2>Doing</h2>
                 <ul class="taken">
-                    <li>Taak1</li>
-                    <li>Taak2</li>
+                    <?php
+                    foreach($tasks as $task) {
+                        if ($task['status'] == 'doing') {
+                            echo "<li>" . $task['name'] . "</li>";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="column">
                 <h2>In-Review</h2>
                 <ul class="taken">
-                    <li>Taak1</li>
+                    <?php
+                    foreach($tasks as $task) {
+                        if ($task['status'] == 'in-Review') {
+                            echo "<li>" . $task['name'] . "</li>";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="column">
                 <h2>Done</h2>
                 <ul class="taken">
-                    <li>Taak1</li>
+                    <?php
+                    foreach($tasks as $task) {
+                        if ($task['status'] == 'done') {
+                            echo "<li>" . $task['name'] . "</li>";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
