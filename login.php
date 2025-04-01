@@ -14,6 +14,7 @@ require_once './config/config.php';
     <?php require_once "./resources/views/header.php"; ?>
     <main>
         <div class="forms">
+            <img src="resources/img/logo.png" alt="logo-img">
             <form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/logincontroller.php" method="post" id="loginform">
                 <h1>Login</h1>
                 <div class="login">
@@ -23,7 +24,7 @@ require_once './config/config.php';
                             <input type="email" id="email" name="email" required placeholder="E-mail">
                         </div>
                         <div class="info">
-                            <label for="password">Wachtwoord</label>
+                            <label for="password">Wachtwoord:</label>
                             <input type="password" id="password" name="password" required placeholder="Wachtwoord">
                         </div>
                     </div>
@@ -44,7 +45,7 @@ require_once './config/config.php';
                             <input type="email" id="email" name="email" required placeholder="Email address">
                         </div>
                         <div class="info">
-                            <label for="password">Wachtwoord</label>
+                            <label for="password">Wachtwoord:</label>
                             <input type="password" id="password" name="password" required placeholder="Wachtwoord">
                         </div>
                     </div>

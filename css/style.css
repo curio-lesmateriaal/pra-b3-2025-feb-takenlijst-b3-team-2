@@ -94,6 +94,12 @@ header img {
     background-color: #1B264F;
 }
 
+.forms img
+{
+    margin: auto;
+    height: 35vh;
+}
+
 form {
     display: flex;
     flex-direction: column;
