@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 -- Database: `takenlijst`
 --
 
--- --------------------------------------------------------
+CREATE DATABASE takenlijst;
+USE takenlijst;
 
 --
 -- Table structure for table `taken`
