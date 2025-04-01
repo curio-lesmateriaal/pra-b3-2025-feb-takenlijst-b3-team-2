@@ -1,6 +1,6 @@
 <?php
 session_start();
-global $base_url;
+global $base_url, $tasks;
 
 require_once './config/config.php';
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
@@ -33,10 +33,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>To-do</h2>
                 <ul class="taken">
                     <?php
-                    foreach($tasks as $task) {
-                        if ($task['status'] == 'To-do') {
-                            echo "<li>" . $task['name'] . "</li>";
-                        }
+                    $todo = array_filter($tasks, fn($task) => $task['status'] == 'To-do');
+
+                    foreach($todo as $task) {
+                        echo "<li>" . $task['name'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -45,10 +45,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>Doing</h2>
                 <ul class="taken">
                     <?php
-                    foreach($tasks as $task) {
-                        if ($task['status'] == 'doing') {
-                            echo "<li>" . $task['name'] . "</li>";
-                        }
+                    $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
+
+                    foreach($doing as $task) {
+                        echo "<li>" . $task['name'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -57,10 +57,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>In-Review</h2>
                 <ul class="taken">
                     <?php
-                    foreach($tasks as $task) {
-                        if ($task['status'] == 'in-Review') {
-                            echo "<li>" . $task['name'] . "</li>";
-                        }
+                    $Review = array_filter($tasks, fn($task) => $task['status'] == 'in-Review');
+
+                    foreach($Review as $task) {
+                        echo "<li>" . $task['name'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -69,10 +69,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>Done</h2>
                 <ul class="taken">
                     <?php
-                    foreach($tasks as $task) {
-                        if ($task['status'] == 'done') {
-                            echo "<li>" . $task['name'] . "</li>";
-                        }
+                    $done = array_filter($tasks, fn($task) => $task['status'] == 'done');
+
+                    foreach($done as $task) {
+                        echo "<li>" . $task['name'] . "</li>";
                     }
                     ?>
                 </ul>
