@@ -1,9 +1,10 @@
 <?php
+session_start();
 global $base_url;
 
-require_once 'config/config.php';
+require_once './config/config.php';
+require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 
-session_start();
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
