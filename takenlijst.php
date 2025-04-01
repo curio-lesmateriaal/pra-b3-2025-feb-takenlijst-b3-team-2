@@ -33,10 +33,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>To-do</h2>
                 <ul class="taken">
                     <?php
-                    $todo = array_filter($tasks, fn($task) => $task['status'] == 'To-do');
+                    $todo = array_filter($tasks, fn($task) => $task['status'] == 'to-do');
 
                     foreach($todo as $task) {
-                        echo "<li>" . $task['name'] . "</li>";
+                        echo "<li>" . $task['titel'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -48,7 +48,7 @@ if ($_SESSION['is_logged_in'] == false) {
                     $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
 
                     foreach($doing as $task) {
-                        echo "<li>" . $task['name'] . "</li>";
+                        echo "<li>" . $task['titel'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -57,10 +57,10 @@ if ($_SESSION['is_logged_in'] == false) {
                 <h2>In-Review</h2>
                 <ul class="taken">
                     <?php
-                    $Review = array_filter($tasks, fn($task) => $task['status'] == 'in-Review');
+                    $Review = array_filter($tasks, fn($task) => $task['status'] == 'review');
 
                     foreach($Review as $task) {
-                        echo "<li>" . $task['name'] . "</li>";
+                        echo "<li>" . $task['titel'] . "</li>";
                     }
                     ?>
                 </ul>
@@ -72,7 +72,7 @@ if ($_SESSION['is_logged_in'] == false) {
                     $done = array_filter($tasks, fn($task) => $task['status'] == 'done');
 
                     foreach($done as $task) {
-                        echo "<li>" . $task['name'] . "</li>";
+                        echo "<li>" . $task['titel'] . "</li>";
                     }
                     ?>
                 </ul>
