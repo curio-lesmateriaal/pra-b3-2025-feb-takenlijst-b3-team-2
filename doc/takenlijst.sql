@@ -34,10 +34,24 @@ CREATE TABLE `taken` (
   `beschrijving` text NOT NULL,
   `afdeling` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'todo',
-  `deadline` date DEFAULT NULL,
+  `deadline` DATETIME NOT NULL,
   `user` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `taken`
+--
+
+INSERT INTO taken (titel, beschrijving, afdeling, status, deadline, user, created_at) VALUES
+('Website update', 'Herontwerpen van de homepage', 'IT', 'doing', '2025-04-10 12:00:00', 1, NOW()),
+('Klantmeeting', 'Afspraak met klant over nieuwe features', 'Sales', 'to-do', '2025-04-12 10:00:00', 2, NOW()),
+('Bug fix API', 'Oplossen van kritieke bug in backend', 'Development', 'review', '2025-04-08 15:30:00', 3, NOW()),
+('Nieuwe campagne', 'Opzetten van een marketingcampagne', 'Marketing', 'to-do', '2025-04-15 09:00:00', 4, NOW()),
+('Pen test uitvoeren', 'Beveiligingstesten uitvoeren op het netwerk', 'Cybersecurity', 'doing', '2025-04-18 14:00:00', 5, NOW()),
+('Rapportage Q1', 'Opstellen kwartaalrapportage', 'Finance', 'done', '2025-04-05 17:00:00', 6, NOW()),
+('Nieuwe medewerkers onboarden', 'Introductie voor nieuwe teamleden', 'HR', 'review', '2025-04-20 11:00:00', 7, NOW());
+
 
 -- --------------------------------------------------------
 
