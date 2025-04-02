@@ -1,5 +1,5 @@
 <?php
-$user_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 if($user_id == null)
 {
     header('location: '.$base_url.'/login.php');
