@@ -35,8 +35,18 @@ if ($_SESSION['is_logged_in'] == false) {
                     <?php
                     $todo = array_filter($tasks, fn($task) => $task['status'] == 'to-do');
 
-                    foreach($todo as $task) {
-                        echo "<li>" . $task['titel'] . "</li>";
+                    foreach ($todo as $task) {
+                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
+                            "<div class=\"button-container\">
+                <button class=\"dropdown-button\">
+                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
+                </button>
+                <div class=\"dropdown-content\">
+                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
+                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
+                </div>
+            </div>" .
+                            "</li>";
                     }
                     ?>
                 </ul>
@@ -47,11 +57,22 @@ if ($_SESSION['is_logged_in'] == false) {
                     <?php
                     $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
 
-                    foreach($doing as $task) {
-                        echo "<li>" . $task['titel'] . "</li>";
+                    foreach ($doing as $task) {
+                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
+                            "<div class=\"button-container\">
+                <button class=\"dropdown-button\">
+                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
+                </button>
+                <div class=\"dropdown-content\">
+                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
+                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
+                </div>
+            </div>" .
+                            "</li>";
                     }
                     ?>
                 </ul>
+
             </div>
             <div class="column">
                 <h2>In-Review</h2>
@@ -59,8 +80,18 @@ if ($_SESSION['is_logged_in'] == false) {
                     <?php
                     $Review = array_filter($tasks, fn($task) => $task['status'] == 'review');
 
-                    foreach($Review as $task) {
-                        echo "<li>" . $task['titel'] . "</li>";
+                    foreach ($Review as $task) {
+                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
+                            "<div class=\"button-container\">
+                <button class=\"dropdown-button\">
+                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
+                </button>
+                <div class=\"dropdown-content\">
+                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
+                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
+                </div>
+            </div>" .
+                            "</li>";
                     }
                     ?>
                 </ul>
@@ -71,8 +102,18 @@ if ($_SESSION['is_logged_in'] == false) {
                     <?php
                     $done = array_filter($tasks, fn($task) => $task['status'] == 'done');
 
-                    foreach($done as $task) {
-                        echo "<li>" . $task['titel'] . "</li>";
+                    foreach ($done as $task) {
+                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
+                            "<div class=\"button-container\">
+                <button class=\"dropdown-button\">
+                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
+                </button>
+                <div class=\"dropdown-content\">
+                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
+                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
+                </div>
+            </div>" .
+                            "</li>";
                     }
                     ?>
                 </ul>
@@ -83,5 +124,13 @@ if ($_SESSION['is_logged_in'] == false) {
     <?php require_once "./resources/views/footer.php"; ?>
 
 </body>
+
+<script>
+    document.querySelector('.dropdown-button').addEventListener('click', function () {
+        const dropdown = document.querySelector('.dropdown-content');
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    });
+
+</script>
 
 </html>
