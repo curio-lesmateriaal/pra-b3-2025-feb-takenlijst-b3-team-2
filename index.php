@@ -7,10 +7,7 @@ if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
 
-if ($_SESSION['is_logged_in'] == false) {
-    header('location: ' . $base_url . '/login.php');
-    exit;
-}
+
 ?>
 
 <!doctype html>
