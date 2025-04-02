@@ -94,8 +94,7 @@ header img {
     background-color: #1B264F;
 }
 
-.forms img
-{
+.forms img {
     margin: auto;
     height: 35vh;
 }
@@ -259,4 +258,15 @@ footer p {
 .container p {
     margin-top: 5vh;
     max-width: 85%;
+}
+
+.logout-button {
+    cursor: pointer;
+    color: white;
+    position: relative;
+}
+
+.logout-form {
+    background-color: transparent;
+    width: fit-content;
 }
