@@ -43,7 +43,7 @@ if ($_SESSION['is_logged_in'] == false) {
                 </button>
                 <div class=\"dropdown-content\">
                     <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
-                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
+                    <a href=\"remove.php?id=" . urlencode($task['id']) . "?action=delete" . "\" class=\"remove\">Remove</a>
                 </div>
             </div>" .
                             "</li>";
