@@ -32,19 +32,6 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             echo "Error creating task.";
         }
     }elseif($_POST['action'] == 'update'){
-    }elseif($_GET['action'] == "delete"){
-        $id = $_GET['id'];
-        $user_id = $_SESSION['user_id'];
-        $sql = "DELETE FROM taken WHERE id = :id AND user = :user_id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user_id);
-        if ($stmt->execute()) {
-            header('location: takenlijst.php');
-            exit;
-        } else {
-            echo "Error deleting task.";
-        }
         $title = $_POST["title"];
         $content = $_POST["bescrijving"];
         $department = $_POST["department"];
@@ -67,7 +54,20 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt->bindParam(':id', $user_id);
         $stmt->execute();
 
+    }elseif($_GET['action'] == "delete"){
+        $id = $_GET['id'];
+        $user_id = $_SESSION['user_id'];
+        $sql = "DELETE FROM taken WHERE id = :id AND user = :user_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':user_id', $user_id);
+        if ($stmt->execute()) {
+            header('location: takenlijst.php');
+            exit;
+        } else {
+            echo "Error deleting task.";
+        }
         header('location: '.$base_url.'/takenlijst.php');
-    }elseif($_POST['action'] == "delete"){
+        exit;
     }
 }
