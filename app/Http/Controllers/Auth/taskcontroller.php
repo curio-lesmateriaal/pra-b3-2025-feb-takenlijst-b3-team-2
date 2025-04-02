@@ -5,7 +5,7 @@ if($user_id == null)
     header('location: '.$base_url.'/login.php');
     die("Error: please log in!");
 }
-<<<<<<< Updated upstream
+
 require_once __DIR__ . '/../../../../config/conn.php'; 
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     if($_SESSION['action'] == "select"||$_POST['action'] == "select"){
@@ -15,11 +15,6 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt->execute();
         $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }elseif($_POST['action'] == 'create') {
-=======
-require_once __DIR__ . '/../../../../config/conn.php';
-if(isset($_POST['action'])) {
-    if($_POST['action'] == 'create') {
->>>>>>> Stashed changes
         $title = $_POST['title'];
         $description = $_POST['description'];
         $afdeling = $_POST['afdeling'];
@@ -38,9 +33,6 @@ if(isset($_POST['action'])) {
             echo "Error creating task.";
         }
     }elseif($_POST['action'] == 'update'){
-<<<<<<< Updated upstream
-=======
-
         $title = $_POST["title"];
         $content = $_POST["bescrijving"];
         $department = $_POST["department"];
@@ -64,15 +56,6 @@ if(isset($_POST['action'])) {
         $stmt->execute();
 
         header('location: '.$base_url.'/takenlijst.php');
-
-
-    }elseif($_POST['action'] == "select"){
-        $sql = "SELECT * FROM taken WHERE user = :user_id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-        $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
->>>>>>> Stashed changes
     }elseif($_POST['action'] == "delete"){
     }
 }
