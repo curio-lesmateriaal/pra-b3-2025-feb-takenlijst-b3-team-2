@@ -17,7 +17,7 @@ if ($_SESSION['is_logged_in'] == false) {
 <html lang="nl">
 
 <head>
-    <title></title>
+    <title>home</title>
     <?php require_once "./resources/views/head.php"; ?>
 </head>
 
