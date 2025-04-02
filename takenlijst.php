@@ -27,7 +27,7 @@ if ($_SESSION['is_logged_in'] == false) {
 
     <?php require_once "./resources/views/header.php"; ?>
 
-    <main class="container takenlijst">
+    <main class="container">
         <div class="flex-container" id="columns">
             <div class="column">
                 <h2>To-do</h2>
