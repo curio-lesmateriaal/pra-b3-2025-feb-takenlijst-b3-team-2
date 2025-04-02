@@ -1,10 +1,16 @@
 <?php
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+global $conn, $base_url;
+
+$user_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+
 if($user_id == null)
 {
     header('location: '.$base_url.'/login.php');
     die("Error: please log in!");
 }
+
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     if($_SESSION['action'] == "select"||$_POST['action'] == "select"){

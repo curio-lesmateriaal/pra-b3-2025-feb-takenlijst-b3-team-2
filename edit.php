@@ -1,8 +1,9 @@
 <?php
 session_start();
-global $base_url;
+global $base_url, $conn;
 
 require_once 'config/config.php';
+
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
@@ -12,11 +13,19 @@ if ($_SESSION['is_logged_in'] == false) {
     exit;
 }
 
-$sql = "SELECT * FROM taken WHERE user = :user_id";
+require_once "config/conn.php";
+
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM taken WHERE id = :id";
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':user_id', $user_id);
+$stmt->bindParam(':id', $id);
 $stmt->execute();
-$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$task = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$title = $task['titel'];
+$content = $task['bescrijving'];
+$date = $task['deadline'];
 ?>
 
 <!doctype html>
@@ -31,10 +40,10 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main>
         <form action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
-            <input type="hidden" name="action" id="action" value="update" ?>">
+            <input type="hidden" name="action" id="action" value="update">
 
             <input type="text" name="title" id="title" value="<?php echo $title; ?>">
-            <input type="text" name="content" id="content" value="<?php echo $content; ?>">
+            <textarea name="content" id="content" cols="30" rows="10" ><?php echo $content; ?></textarea>
             <select name="department" id="department">
                 <option value="IT">IT</option>
                 <option value="Sales">Sales</option>

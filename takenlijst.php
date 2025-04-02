@@ -125,12 +125,6 @@ if ($_SESSION['is_logged_in'] == false) {
 
 </body>
 
-<script>
-    document.querySelector('.dropdown-button').addEventListener('click', function () {
-        const dropdown = document.querySelector('.dropdown-content');
-        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-    });
-
-</script>
+<script src="resources/scripts/dropdown.js"></script>
 
 </html>
