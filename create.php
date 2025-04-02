@@ -21,24 +21,26 @@ if ($_SESSION['is_logged_in'] == false) {
     <?php require_once "./resources/views/head.php"; ?>
 </head>
 <body>
-        <?php require_once "./resources/views/header.php"; ?>
+    <?php require_once "./resources/views/header.php"; ?>
     <main>
     <h1>Create Task</h1>
     <form action="create.php" method="POST">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
-        
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
-        <label for = "afdeling">Afdeling:</label>
+        <label for="afdeling">Afdeling:</label>
         <select id="afdeling" name="afdeling" required>
             <option value="development">Development</option>
             <option value="sales">Sales</option>
             <option value="marketing">Marketing</option>
             <option value="cybersecurity">Cybersecurity</option>
             <option value="finance">Finance</option>
-            <option value="iT">IT</option>
+            <option value="it">IT</option>
+        </select>
+        <input type="hidden" name="action" value="create">
         <button type="submit">Create Task</button>
     </main>
+     <?php require_once "./resources/views/footer.php"; ?>
 </body>
 </html>
