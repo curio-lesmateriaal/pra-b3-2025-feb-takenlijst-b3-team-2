@@ -23,6 +23,12 @@ $stmt->bindParam(':email', $email);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$query = "SELECT id FROM users WHERE email = :email";
+$stmt = $conn->prepare($query);
+$stmt->bindParam(':email', $email);
+$stmt->execute();
+$user = $stmt->fetch();
+
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['username'] = $username;
 $_SESSION['email'] = $email;
