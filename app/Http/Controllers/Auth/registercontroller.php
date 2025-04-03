@@ -9,7 +9,7 @@ $password = isset($_POST['password']) ? $_POST['password'] : null;
 $email = isset($_POST['email']) ? $_POST['email'] : null;
 
 if ($username == null or $password == null or $email == null) {
-    header('location: ' . $base_url . '/index.php');
+    // header('location: ' . $base_url . '/index.php');
     die("Error: please fill out the form!");
 }
 
@@ -29,5 +29,6 @@ $_SESSION['email'] = $email;
 $_SESSION['password'] = $password_hash;
 $_SESSION['is_logged_in'] = true;
 
-header('location: ' . $base_url . '/takenlijst.php');
+// header('location: ' . $base_url . '/takenlijst.php');
+echo "Registration successful! You can now log in.";
 exit;
