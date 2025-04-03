@@ -17,6 +17,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $_SESSION['status'] = !empty($tasks['status']) ? $tasks['status'] : '';
         $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
         $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
+        exit();
 
     }elseif($_SESSION['action'] == "select"||$_POST['action'] == "select"){
         $sql = "SELECT * FROM taken WHERE user = :user_id";
@@ -39,7 +40,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt->bindParam(':user_id', $user_id);
         if ($stmt->execute()) {
             header('location: takenlijst.php');
-            exit;
+            exit();
         } else {
             echo "Error creating task.";
         }
@@ -68,22 +69,21 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
 
 
         header('Location: '.$base_url.'/takenlijst.php');
-        exit;
+        exit();
 
     }elseif($_GET['action'] == "delete"){
-        $id = $_GET['id'];
-        $user_id = $_SESSION['user_id'];
-        $sql = "DELETE FROM taken WHERE id = :id AND user = :user_id";
+        $task_id = $_SESSION['task_id'];
+        $sql = "DELETE FROM taken WHERE id = :id AND user = :task_id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':task_id', $task_id);
         if ($stmt->execute()) {
             header('location: takenlijst.php');
-            exit;
+            exit();
         } else {
             echo "Error deleting task.";
         }
         header('location: '.$base_url.'/takenlijst.php');
-        exit;
+        exit();
     }
 }
