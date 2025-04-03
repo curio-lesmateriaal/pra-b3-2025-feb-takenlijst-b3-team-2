@@ -1,8 +1,7 @@
 <?php
-$_SESSION['action'] = "edit";
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
+$_SESSION['action'] = "edit";
 global $base_url, $conn, $tasks;
-$_SESSION['action'] = "";
 $id = $_GET['id'];
 $_SESSION['task_id'] = $id;
 
