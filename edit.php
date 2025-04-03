@@ -4,7 +4,7 @@ global $base_url, $conn, $tasks;
 
 require_once 'config/config.php';
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
-$_SESSION['action']  = "select";
+$_SESSION['action']  = "edit";
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
@@ -37,19 +37,19 @@ $id = $_GET['id'];
             <input type="text" name="title" id="title" value="<?php echo $_SESSION['title']; ?>">
             <textarea name="content" id="content" cols="30" rows="10" ><?php echo $_SESSION['description']; ?></textarea>
             <select name="department" id="department">
-                <option value="IT">IT</option>
-                <option value="Sales">Sales</option>
-                <option value="Development">Development</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Finance">Finance</option>
-                <option value="HR">HR</option>
+                <option value="IT" <?php if ($_SESSION['department'] == "IT") {echo "selected";} ?>>IT</option>
+                <option value="Sales" <?php if ($_SESSION['department'] == "Sales") {echo "selected";} ?>>Sales</option>
+                <option value="Development" <?php if ($_SESSION['department'] == "Development") {echo "selected";} ?>>Development</option>
+                <option value="Marketing" <?php if ($_SESSION['department'] == "Marketing") {echo "selected";} ?>>Marketing</option>
+                <option value="Cybersecurity" <?php if ($_SESSION['department'] == "Cybersecurity") {echo "selected";} ?>>Cybersecurity</option>
+                <option value="Finance" <?php if ($_SESSION['department'] == "Finance") {echo "selected";} ?>>Finance</option>
+                <option value="HR" <?php if ($_SESSION['department'] == "HR") {echo "selected";} ?>>HR</option>
             </select>
             <select name="status" id="status" >
-                <option value="to-do">to-do</option>
-                <option value="doing">doing</option>
-                <option value="review">review</option>
-                <option value="done">done</option>
+                <option value="to-do" <?php if ($_SESSION['status'] == "to-do") {echo "selected";} ?>>to-do</option>
+                <option value="doing" <?php if ($_SESSION['status'] == "doing") {echo "selected";} ?>>doing</option>
+                <option value="review" <?php if ($_SESSION['status'] == "review") {echo "selected";} ?>>review</option>
+                <option value="done" <?php if ($_SESSION['status'] == "done") {echo "selected";} ?>>done</option>
             </select>
             <input type="date" name="date" id="date" value="<?php echo $_SESSION['deadline']; ?>">
             <input type="submit" name="submit" id="submit">

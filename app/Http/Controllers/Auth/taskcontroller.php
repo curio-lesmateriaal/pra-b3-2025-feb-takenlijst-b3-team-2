@@ -4,7 +4,7 @@ global $conn, $base_url;
 
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
-    if($_SESSION['action'] == "select"||$_POST['action'] == "select"){
+    if($_SESSION['action'] == "edit"){
         $sql = "SELECT * FROM taken WHERE user = :user_id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':user_id', $user_id);
@@ -16,6 +16,13 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $_SESSION['status'] = !empty($tasks['status']) ? $tasks['status'] : '';
         $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
         $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
+
+    }elseif($_SESSION['action'] == "select"||$_POST['action'] == "select"){
+        $sql = "SELECT * FROM taken WHERE user = :user_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $tasks = $stmt->fetchall(PDO::FETCH_ASSOC);
 
     }elseif($_POST['action'] == 'create') {
         $title = $_POST['title'];
