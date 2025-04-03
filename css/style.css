@@ -99,7 +99,7 @@ header img {
     height: 35vh;
 }
 
-form {
+.login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,7 +111,7 @@ form {
     width: 30%;
 }
 
-form a {
+.login-form a {
     cursor: pointer;
     position: relative;
     transition: ease .3s;
@@ -119,7 +119,7 @@ form a {
     color: #1a73e8;
 }
 
-form a::after {
+.login-form a::after {
     content: '';
     position: absolute;
     height: 1.5px;
@@ -130,7 +130,7 @@ form a::after {
     transition: width .3s;
 }
 
-form a:hover::after {
+.login-form a:hover::after {
     width: 100%;
 }
 
@@ -156,7 +156,7 @@ form a:hover::after {
     margin-top: 5px;
 }
 
-form button {
+.login-form button {
     border: none;
     outline: none;
     padding: 1vh 2vh;
@@ -167,7 +167,7 @@ form button {
     align-self: flex-start;
 }
 
-form p {
+.login-form p {
     text-align: center;
     margin-top: 10px;
 }
@@ -309,4 +309,14 @@ footer p {
 
 .button-container:hover .dropdown-content {
     display: block;
+}
+
+
+
+.create-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
