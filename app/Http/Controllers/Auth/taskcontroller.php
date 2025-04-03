@@ -6,7 +6,7 @@ $_SESSION[' error'] = "";
 echo $_SESSION['action'];
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
-    switch($_SESSION['action']||$_POST['action']) {
+    switch($_SESSION['action']??$_POST['action']) {
         case 'create':
             if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
                 $_SESSION['error'] = 'Please fill out all fields.';
@@ -60,6 +60,10 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             header('location: '.$base_url.'/takenlijst.php');
             break;
         case 'select':
+            $user_id = $_SESSION['user_id'];
+            if (empty($user_id)) {
+                die("Error: please log in!");
+            }
             $sql = "SELECT * FROM taken WHERE user = :user_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':user_id', $user_id);
