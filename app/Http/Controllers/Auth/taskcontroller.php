@@ -5,9 +5,9 @@ global $conn, $base_url;
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     if($_SESSION['action'] == "edit"){
-        $sql = "SELECT * FROM taken WHERE user = :user_id";
+        $sql = "SELECT * FROM taken WHERE id = :task_id";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':task_id', $_SESSION['task_id']);
         $stmt->execute();
         $tasks = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -62,7 +62,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt->bindParam(':afdeling', $department);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':deadline', $deadline);
-        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':id', $_SESSION['task_id']);
         $stmt->execute();
 
         header('location: '.$base_url.'/takenlijst.php');

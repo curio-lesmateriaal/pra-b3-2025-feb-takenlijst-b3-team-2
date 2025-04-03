@@ -2,6 +2,9 @@
 session_start();
 global $base_url, $conn, $tasks;
 
+$id = $_GET['id'];
+$_SESSION['task_id'] = $id;
+
 require_once 'config/config.php';
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 $_SESSION['action']  = "edit";
@@ -15,9 +18,6 @@ if ($_SESSION['is_logged_in'] == false) {
 }
 
 require_once "config/conn.php";
-
-$id = $_GET['id'];
-
 ?>
 
 <!doctype html>
