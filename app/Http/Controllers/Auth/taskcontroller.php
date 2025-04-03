@@ -9,7 +9,14 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
-        $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $tasks = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $_SESSION['title'] = !empty($tasks['titel']) ? $tasks['titel'] : '';
+        $_SESSION['description'] = !empty($tasks['beschrijving']) ? $tasks['beschrijving'] : '';
+        $_SESSION['status'] = !empty($tasks['status']) ? $tasks['status'] : '';
+        $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
+        $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
+
     }elseif($_POST['action'] == 'create') {
         $title = $_POST['title'];
         $description = $_POST['description'];
@@ -50,6 +57,9 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         $stmt->bindParam(':deadline', $deadline);
         $stmt->bindParam(':id', $user_id);
         $stmt->execute();
+
+        header('location: '.$base_url.'/takenlijst.php');
+        exit;
 
     }elseif($_GET['action'] == "delete"){
         $id = $_GET['id'];

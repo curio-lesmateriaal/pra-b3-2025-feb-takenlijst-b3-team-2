@@ -1,9 +1,10 @@
 <?php
 session_start();
-global $base_url, $conn;
+global $base_url, $conn, $tasks;
 
 require_once 'config/config.php';
-
+require_once "./app/Http/Controllers/Auth/taskcontroller.php";
+$_SESSION['action']  = "select";
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
@@ -17,15 +18,6 @@ require_once "config/conn.php";
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM taken WHERE id = :id";
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(':id', $id);
-$stmt->execute();
-$task = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$title = $task['titel'];
-$content = $task['bescrijving'];
-$date = $task['deadline'];
 ?>
 
 <!doctype html>
@@ -42,8 +34,8 @@ $date = $task['deadline'];
         <form action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
             <input type="hidden" name="action" id="action" value="update">
 
-            <input type="text" name="title" id="title" value="<?php echo $title; ?>">
-            <textarea name="content" id="content" cols="30" rows="10" ><?php echo $content; ?></textarea>
+            <input type="text" name="title" id="title" value="<?php echo $_SESSION['title']; ?>">
+            <textarea name="content" id="content" cols="30" rows="10" ><?php echo $_SESSION['description']; ?></textarea>
             <select name="department" id="department">
                 <option value="IT">IT</option>
                 <option value="Sales">Sales</option>
@@ -59,7 +51,7 @@ $date = $task['deadline'];
                 <option value="review">review</option>
                 <option value="done">done</option>
             </select>
-            <input type="date" name="date" id="date" value="<?php echo $date; ?>">
+            <input type="date" name="date" id="date" value="<?php echo $_SESSION['deadline']; ?>">
             <input type="submit" name="submit" id="submit">
         </form>
     </main>
