@@ -1,9 +1,8 @@
 <?php
-session_start();
+require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
 $_SESSION['action'] = "select";
 require_once './config/config.php';
-require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 global $conn, $base_url;
 
@@ -44,10 +45,10 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         }
     }elseif($_POST['action'] == 'update'){
         $title = $_POST["title"];
-        $content = $_POST["bescrijving"];
+        $content = $_POST["content"];
         $department = $_POST["department"];
         $status = $_POST["status"];
-        $deadline = $_POST["deadline"];
+        $deadline = $_POST["date"];
 
         if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline))
         {
@@ -55,17 +56,18 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             die("Error: please fill out the form!");
         }
 
-        $sql = "UPDATE taken SET titel =':titel', bescrijving = ':bescrijving', afdeling = ':afdeling', status = ':status', deadline='deadline'  WHERE id = ':id'";
+        $sql = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':titel', $title);
-        $stmt->bindParam(':bescrijving', $content);
+        $stmt->bindParam(':beschrijving', $content);
         $stmt->bindParam(':afdeling', $department);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':deadline', $deadline);
         $stmt->bindParam(':id', $_SESSION['task_id']);
         $stmt->execute();
 
-        header('location: '.$base_url.'/takenlijst.php');
+
+        header('Location: '.$base_url.'/takenlijst.php');
         exit;
 
     }elseif($_GET['action'] == "delete"){

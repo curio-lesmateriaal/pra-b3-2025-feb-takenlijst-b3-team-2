@@ -1,13 +1,13 @@
 <?php
-session_start();
+$_SESSION['action']  = "edit";
+require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $conn, $tasks;
-
+$_SESSION['action']  = "";
 $id = $_GET['id'];
 $_SESSION['task_id'] = $id;
 
 require_once 'config/config.php';
-require_once "./app/Http/Controllers/Auth/taskcontroller.php";
-$_SESSION['action']  = "edit";
+
 if (!isset($_SESSION['is_logged_in'])) {
     $_SESSION['is_logged_in'] = false;
 }
