@@ -25,12 +25,12 @@ require_once "config/conn.php";
 <html lang="en">
 <head>
     <?php require_once "./resources/views/head.php"; ?>
-    <title>Document</title>
+    <title>remove</title>
 </head>
 <body>
 <?php require_once "./resources/views/header.php"; ?>
     <main>
-        <form action="app/Http/Controllers/taskcontroller.php" method="post">
+        <form action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
             <input type="hidden" name="action" id="action" value="delete">
 
             <p>are you sure you want to remove this task</p>
