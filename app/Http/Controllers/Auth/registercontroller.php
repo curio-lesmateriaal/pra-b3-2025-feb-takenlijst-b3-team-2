@@ -28,6 +28,6 @@ $_SESSION['username'] = $username;
 $_SESSION['email'] = $email;
 $_SESSION['password'] = $password_hash;
 $_SESSION['is_logged_in'] = true;
-// TODO add a header to where the user page will be
-header('location: ' . $base_url . '/index.php');
+
+header('location: ' . $base_url . '/takenlijst.php');
 exit;

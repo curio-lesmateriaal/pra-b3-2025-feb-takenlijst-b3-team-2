@@ -28,5 +28,5 @@ $_SESSION['user_id'] = $user['id'];
 $_SESSION['username'] = $user['username'];
 $_SESSION['is_logged_in'] = true;
 error_log("Session is_logged_in: " . $_SESSION['is_logged_in']);
-header('location: '.$base_url.'/index.php');
+header('location: '.$base_url.'/takenlijst.php');
 exit;
