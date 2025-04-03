@@ -23,20 +23,28 @@ require_once "config/conn.php";
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <?php require_once "./resources/views/head.php"; ?>
     <title>remove</title>
 </head>
-<body>
-<?php require_once "./resources/views/header.php"; ?>
-    <main>
-        <form action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
-            <input type="hidden" name="action" id="action" value="delete">
 
-            <p>are you sure you want to remove this task</p>
-            <input type="submit" name="submit" id="submit" value="yes">
-        </form>
+<body>
+    <?php require_once "./resources/views/header.php"; ?>
+    <main>
+        <div class="remove-box">
+            <div class="remove-border">
+                <h1>Remove</h1>
+                <form class="remove-form" action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
+                    <input type="hidden" name="action" id="action" value="delete">
+
+                    <p>are you sure you want to remove this task</p>
+                    <input class="remove-submit" type="submit" name="submit" id="submit" value="yes">
+                </form>
+            </div>
+        </div>
     </main>
-<?php require_once "./resources/views/footer.php"; ?>
+    <?php require_once "./resources/views/footer.php"; ?>
 </body>
+
 </html>
