@@ -65,6 +65,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
             $tasks = $stmt->fetchall(PDO::FETCH_ASSOC);
+            $_SESSION['tasks'] = $tasks;
             break;
         case 'update':
             $title = $_POST["title"];

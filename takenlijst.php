@@ -1,6 +1,8 @@
 <?php
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
+$tasks = $_SESSION['tasks'] ?? [];
+echo $tasks;
 $_SESSION['action'] = "select";
 require_once './config/config.php';
 
