@@ -3,6 +3,8 @@ session_start();
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 global $conn, $base_url;
 $_SESSION[' error'] = "";
+echo $_POST['action'];
+echo "<br>";
 echo $_SESSION['action'];
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
@@ -33,6 +35,9 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 break;
             } 
         case 'edit':
+            if($_POST['action'] == "update"){
+                break;
+            }
             $sql = "SELECT * FROM taken WHERE id = :task_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':task_id', $_SESSION['task_id']);
@@ -44,6 +49,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $_SESSION['status'] = !empty($tasks['status']) ? $tasks['status'] : '';
             $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
             $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
+            header('location: '.$base_url.'/takenlijst.php');
             break;
         case 'delete':
             $task_id = $_SESSION['task_id'];
@@ -52,7 +58,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':task_id', $task_id);
             if ($stmt->execute()) {
-                header('location: takenlijst.php');
+                header('location: '.$base_url.' takenlijst.php');
                 exit();
             } else {
                 echo "Error deleting task.";
@@ -77,7 +83,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $department = $_POST["department"];
             $status = $_POST["status"];
             $deadline = $_POST["date"];
-    
+            
             if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline))
             {
                 header('location: '.$base_url.'/edit.php?$id');
@@ -93,8 +99,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':deadline', $deadline);
             $stmt->bindParam(':id', $_SESSION['task_id']);
             $stmt->execute();
-    
-    
+            echo "Task updated successfully!";
             header('Location: '.$base_url.'/takenlijst.php');
             break;
         default:
