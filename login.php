@@ -17,7 +17,7 @@ if (!isset($_SESSION['is_logged_in'])) {
     <main>
         <div class="forms">
             <img src="resources/img/logo.png" alt="logo-img">
-            <form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/logincontroller.php" method="post" id="loginform">
+            <form class="login-form" action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/logincontroller.php" method="post" id="loginform">
                 <h1>Login</h1>
                 <div class="login">
                     <div class="user_info">
@@ -34,7 +34,7 @@ if (!isset($_SESSION['is_logged_in'])) {
                     <p class="medium">Heb je nog geen account? <a href="#" id="toggle">Registreer</a></p>
                 </div>
             </form>
-            <form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/registercontroller.php" method="post" style="display: none;" id="registerform">
+            <form class="login-form action="<?php echo $base_url; ?>/app/Http/Controllers/Auth/registercontroller.php" method="post" style="display: none;" id="registerform">
                 <h1>Registreer</h1>
                 <div class="login">
                     <div class="user_info">
