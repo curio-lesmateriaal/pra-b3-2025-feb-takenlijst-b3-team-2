@@ -16,7 +16,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
         case 'create':
             if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
                 $_SESSION['error'] = 'Please fill out all fields.';
-                 header('location: '.$base_url.'/takenlijst.php');
+                header('location: '.$base_url.'/takenlijst.php');
                 break;
             }
             $title = $_POST['title'];
@@ -75,7 +75,6 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 header('location: '.$base_url.'/takenlijst.php');
                 die("error while deleting.");
             }
-            break;
         case 'select':
             $user_id = $_SESSION['user_id'];
             if (empty($user_id)) {
