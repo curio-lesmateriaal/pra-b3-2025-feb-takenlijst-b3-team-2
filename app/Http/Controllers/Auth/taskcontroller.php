@@ -13,8 +13,7 @@ if(!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
-echo "task".$_SESSION['task_id'];
-echo "<br>";
+
 echo $_SESSION['action'];
 echo "<br>"; 
 echo $user_id;
