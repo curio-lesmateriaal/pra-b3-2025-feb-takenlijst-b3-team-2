@@ -25,6 +25,12 @@ if ($_SESSION['is_logged_in'] == false) {
 
 <body>
 
+    <script>if (!window.location.hash.includes('#user')) {
+            window.location.href = window.location.href + '#user';
+            window.location.reload();
+        }
+    </script>
+
     <?php require_once "./resources/views/header.php"; ?>
 
     <main class="container">
@@ -47,6 +53,7 @@ if ($_SESSION['is_logged_in'] == false) {
                                         class="remove">Remove</a>
                                 </div>
                             </div>
+                            <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
                         </li>
@@ -58,8 +65,12 @@ if ($_SESSION['is_logged_in'] == false) {
                 <ul class="taken">
                     <?php
                     $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
+                    
                     foreach ($doing as $task):
+                        $taskcount = 0;
+                        $taskcount++;
                         ?>
+                        
                         <li><?php echo htmlspecialchars($task['titel']) ?>
                             <div class="button-container">
                                 <button class="dropdown-button">
@@ -74,7 +85,7 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
                         </li>
-                    <?php endforeach; ?>
+                    <?php endforeach; if($taskcount = 0) echo "s"; ?>
                 </ul>
             </div>
             <div class="column">
