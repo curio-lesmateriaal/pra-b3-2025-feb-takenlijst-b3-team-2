@@ -3,14 +3,12 @@ if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-global $conn, $base_url;
-if(!isset($_POST['action'])&& !isset($_SESSION['action'])) {
-    $_SESSION['action'] = "";
-    $_POST['action'] = "";
-}
-$_SESSION[' error'] = "";
+
+$_SESSION['error'] = "";
 
 require_once __DIR__ . '/../../../../config/conn.php';
+global $conn, $base_url;
+
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     $action = !empty($_POST['action']) ? $_POST['action'] : (!empty($_SESSION['action']) ? $_SESSION['action'] : null);
     switch($action)
@@ -49,7 +47,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
 
             if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline))
             {
-                header('location: '.$base_url.'/edit.php?$id');
+                header('location: '.$base_url.'/edit.php?id='. $_SESSION['task_id']);
                 die("Error: please fill out the form!");
             }
 
@@ -62,7 +60,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':deadline', $deadline);
             $stmt->bindParam(':id', $_SESSION['task_id']);
             $stmt->execute();
-            echo "Task updated successfully!";
+
             header('Location: '.$base_url.'/takenlijst.php');
             break;
         case 'delete':
@@ -77,6 +75,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 header('location: '.$base_url.'/takenlijst.php');
                 die("error while deleting.");
             }
+            break;
         case 'select':
             $user_id = $_SESSION['user_id'];
             if (empty($user_id)) {
@@ -90,9 +89,6 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $_SESSION['tasks'] = $tasks;
             break;
         case 'edit':
-            if($_POST['action'] == "update"){
-                break;
-            }
             $sql = "SELECT * FROM taken WHERE id = :task_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':task_id', $_SESSION['task_id']);
