@@ -555,3 +555,13 @@ footer p {
 .remove-submit:hover {
     background-color: #0c7777;
 }
+
+.searchbar
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    height: 4vh;
+}
