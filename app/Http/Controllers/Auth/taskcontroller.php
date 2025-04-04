@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 global $conn, $base_url;
 $_SESSION[' error'] = "";
