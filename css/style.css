@@ -565,3 +565,9 @@ footer p {
 
     height: 4vh;
 }
+
+.department {
+    margin: 0 !important;
+    font-size: smaller;
+    color: rgb(158, 158, 158);
+}

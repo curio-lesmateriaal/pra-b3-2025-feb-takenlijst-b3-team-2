@@ -72,6 +72,7 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -81,12 +82,8 @@ if ($_SESSION['is_logged_in'] == false) {
                 <ul class="taken">
                     <?php
                     $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
-                    
                     foreach ($doing as $task):
-                        $taskcount = 0;
-                        $taskcount++;
                         ?>
-                        
                         <li><?php echo htmlspecialchars($task['titel']) ?>
                             <div class="button-container">
                                 <button class="dropdown-button">
@@ -98,10 +95,12 @@ if ($_SESSION['is_logged_in'] == false) {
                                         class="remove">Remove</a>
                                 </div>
                             </div>
+                            <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
-                    <?php endforeach; if($taskcount = 0) echo "s"; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="column">
@@ -122,10 +121,11 @@ if ($_SESSION['is_logged_in'] == false) {
                                         class="remove">Remove</a>
                                 </div>
                             </div>
+                            <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
-                        <li class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -147,8 +147,10 @@ if ($_SESSION['is_logged_in'] == false) {
                                         class="remove">Remove</a>
                                 </div>
                             </div>
+                            <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
