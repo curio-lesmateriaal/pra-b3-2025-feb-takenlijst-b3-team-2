@@ -1,3 +1,30 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F3F5;
+    border-radius: 10px;
+}
+
 .solway-light {
     font-family: "Solway", serif;
     font-weight: 300;
@@ -26,11 +53,6 @@
     font-family: "Solway", serif;
     font-weight: 800;
     font-style: normal;
-}
-
-* {
-    margin: 0;
-    padding: 0;
 }
 
 body {
@@ -225,6 +247,7 @@ footer p {
 }
 
 .taken {
+    overflow-y: scroll;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -234,8 +257,27 @@ footer p {
     padding: 15px 10px;
     margin: 10px;
     background-color: #dbdada;
+    color: rgb(85, 85, 85);
     border: #d7d5d5 solid 1px;
     border-radius: 10%;
+}
+
+.department {
+    margin: 0 !important;
+    font-size: smaller;
+    color: rgb(158, 158, 158);
+}
+
+.deadline {
+    margin: 0 !important;
+    font-size: x-small;
+    color: #717171;
+}
+
+.description {
+    margin: 0 !important;
+    font-size: small;
+    color: #3b3b3b;
 }
 
 .container {
@@ -337,7 +379,7 @@ footer p {
 
 .create-border {
     background-color: #F5F3F5;
-    padding: 200px 300px;
+    padding: 180px 280px;
     border: #1a73e8 1px solid;
     border-radius: 10%;
     box-shadow: black 5px 0px 50px;
@@ -409,7 +451,7 @@ footer p {
 
 .edit-border {
     background-color: #F5F3F5;
-    padding: 200px 300px;
+    padding: 100px 200px;
     border: #1a73e8 1px solid;
     border-radius: 10%;
     box-shadow: black 5px 0px 50px;
@@ -512,4 +554,20 @@ footer p {
 
 .remove-submit:hover {
     background-color: #0c7777;
+}
+
+.searchbar
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    height: 4vh;
+}
+
+.department {
+    margin: 0 !important;
+    font-size: smaller;
+    color: rgb(158, 158, 158);
 }

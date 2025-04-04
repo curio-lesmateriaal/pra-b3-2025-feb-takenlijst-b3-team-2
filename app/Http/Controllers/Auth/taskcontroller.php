@@ -24,9 +24,9 @@ require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     switch($_POST['action']??$_SESSION['action']) {
         case 'create':
-            if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
+            if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
                 $_SESSION['error'] = 'Please fill out all fields.';
-                // header('location: '.$base_url.'/takenlijst.php');
+                header('location: '.$base_url.'/takenlijst.php');
                 break;
             }
             $title = $_POST['title'];
@@ -49,7 +49,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 header('location: '.$base_url.'/takenlijst.php');
                 $_SESSION['action'] = "";
                 break;
-            } 
+            }
         case 'update':
             echo "update fired ";
             $title = isset($_POST["title"]) ? $_POST["title"] : null;
@@ -62,7 +62,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             {
                 die("Error: please fill out the form!");
             }
-    
+
             $sql = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':titel', $title);
@@ -91,7 +91,8 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 header('location: '.$base_url.'/takenlijst.php');
                 exit();
             } else {
-                echo "Error deleting task.";
+                header('location: '.$base_url.'/takenlijst.php');
+                die("error while deleting.");
             }
             $_SESSION['action'] = "";
             break;
@@ -108,11 +109,19 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $_SESSION['tasks'] = $tasks;
             $_SESSION['action'] = "";
             break;
-        case 'edit':
-            if($_POST['action'] == "update"){
-                break;
+        case 'update':
+            $title = $_POST["title"];
+            $content = $_POST["content"];
+            $department = $_POST["department"];
+            $status = $_POST["status"];
+            $deadline = $_POST["date"];
+
+            if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline)) {
+                header('location: ' . $base_url . '/edit.php?$id');
+                die("Error: please fill out the form!");
             }
-            $sql = "SELECT * FROM taken WHERE id = :task_id";
+
+            $sql = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':task_id', $_SESSION['task_id']);
             $stmt->execute();
