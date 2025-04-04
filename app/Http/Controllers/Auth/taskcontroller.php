@@ -9,7 +9,6 @@ if(!isset($_POST['action'])&& !isset($_SESSION['action'])) {
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
-echo $_SESSION['action'];
 
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
@@ -40,20 +39,20 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 $_SESSION['error'] = 'Error creating task.';
                 header('location: '.$base_url.'/takenlijst.php');
                 break;
-            } 
+            }
         case 'update':
             $title = $_POST["title"];
             $content = $_POST["content"];
             $department = $_POST["department"];
             $status = $_POST["status"];
             $deadline = $_POST["date"];
-            
+
             if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline))
             {
                 header('location: '.$base_url.'/edit.php?$id');
                 die("Error: please fill out the form!");
             }
-    
+
             $sql = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':titel', $title);
@@ -99,7 +98,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':task_id', $_SESSION['task_id']);
             $stmt->execute();
             $tasks = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
             $_SESSION['title'] = !empty($tasks['titel']) ? $tasks['titel'] : '';
             $_SESSION['description'] = !empty($tasks['beschrijving']) ? $tasks['beschrijving'] : '';
             $_SESSION['status'] = !empty($tasks['status']) ? $tasks['status'] : '';
