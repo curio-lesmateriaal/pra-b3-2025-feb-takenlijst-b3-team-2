@@ -2,6 +2,7 @@
 if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+// $_SESSION['action'] = "";
 if(isset($_POST['action'])) {
     $_SESSION['action'] = $_POST['action'];
 }
@@ -12,8 +13,11 @@ if(!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
+echo "task".$_SESSION['task_id'];
+echo "<br>";
 echo $_SESSION['action'];
 echo "<br>"; 
+echo $user_id;
 echo "<br>";
 echo isset($_POST['action'])."|".isset($_SESSION['action']);
 echo "<br>";
@@ -75,13 +79,17 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             break;
         case 'delete':
             "delete fired ";
-            $task_id = $_SESSION['task_id'];
-            $sql = "DELETE FROM taken WHERE id = :id AND user = :task_id";
+            $task_id = $_SESSION['task_id']?? null;
+            if($task_id == null) {
+                die("Error: please select a task to delete!");
+            }
+            $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':task_id', $task_id);
             if ($stmt->execute()) {
-                // header('location: '.$base_url.'/takenlijst.php');
+                $_SESSION['action'] = "";
+                header('location: '.$base_url.'/takenlijst.php');
                 exit();
             } else {
                 echo "Error deleting task.";
