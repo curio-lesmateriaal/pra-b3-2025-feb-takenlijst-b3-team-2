@@ -3,6 +3,7 @@ require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
 $tasks = $_SESSION['tasks']?? [];
 $_SESSION['action'] = "select";
+
 require_once './config/config.php';
 
 if (!isset($_SESSION['is_logged_in'])) {

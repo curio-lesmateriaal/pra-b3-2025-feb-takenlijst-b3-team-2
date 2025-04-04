@@ -2,18 +2,24 @@
 if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if(isset($_POST['action'])) {
+    $_SESSION['action'] = $_POST['action'];
+}
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 global $conn, $base_url;
-if(!isset($_POST['action'])&& !isset($_SESSION['action'])) {
+if(!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_SESSION['action'] = "";
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
 echo $_SESSION['action'];
-
+echo "<br>"; 
+echo "<br>";
+echo isset($_POST['action'])."|".isset($_SESSION['action']);
+echo "<br>";
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
-    switch($_SESSION['action']??$_POST['action']) {
+    switch($_POST['action']??$_SESSION['action']) {
         case 'create':
             if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
                 $_SESSION['error'] = 'Please fill out all fields.';
@@ -33,22 +39,24 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->bindParam(':user_id', $user_id);
             if ($stmt->execute()) {
                 header('location: takenlijst.php');
+                $_SESSION['action'] = "";
                 break;
             } else {
                 $_SESSION['error'] = 'Error creating task.';
                 header('location: '.$base_url.'/takenlijst.php');
+                $_SESSION['action'] = "";
                 break;
             } 
         case 'update':
-            $title = $_POST["title"];
-            $content = $_POST["content"];
-            $department = $_POST["department"];
-            $status = $_POST["status"];
-            $deadline = $_POST["date"];
+            echo "update fired ";
+            $title = isset($_POST["title"]) ? $_POST["title"] : null;
+            $content = isset($_POST["content"]) ? $_POST["content"] : null;
+            $department = isset($_POST["department"]) ? $_POST["department"] : null;
+            $status = isset($_POST["status"]) ? $_POST["status"] : null;
+            $deadline = isset($_POST["date"]) ? $_POST["date"] : null;
             
-            if (empty($title) || empty($content) || empty($department) || empty($status) || empty($deadline))
+            if ($title == null || $content == null || $department == null || $status == null || $deadline == null)
             {
-                header('location: '.$base_url.'/edit.php?$id');
                 die("Error: please fill out the form!");
             }
     
@@ -63,20 +71,22 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->execute();
             echo "Task updated successfully!";
             header('Location: '.$base_url.'/takenlijst.php');
+            $_SESSION['action'] = "";
             break;
         case 'delete':
+            "delete fired ";
             $task_id = $_SESSION['task_id'];
             $sql = "DELETE FROM taken WHERE id = :id AND user = :task_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':task_id', $task_id);
             if ($stmt->execute()) {
-                header('location: '.$base_url.' takenlijst.php');
+                // header('location: '.$base_url.'/takenlijst.php');
                 exit();
             } else {
                 echo "Error deleting task.";
             }
-            header('location: '.$base_url.'/takenlijst.php');
+            $_SESSION['action'] = "";
             break;
         case 'select':
             $user_id = $_SESSION['user_id'];
@@ -89,6 +99,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $stmt->execute();
             $tasks = $stmt->fetchall(PDO::FETCH_ASSOC);
             $_SESSION['tasks'] = $tasks;
+            $_SESSION['action'] = "";
             break;
         case 'edit':
             if($_POST['action'] == "update"){
@@ -106,6 +117,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
             $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
             header('location: '.$base_url.'/takenlijst.php');
+            $_SESSION['action'] = "";
             break;
         default:
             $_SESSION['action'] = null;
@@ -113,3 +125,4 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             break;
     }
 }
+$_SESSION['action'] = "";
