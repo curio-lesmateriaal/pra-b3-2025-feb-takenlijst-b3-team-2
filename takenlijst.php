@@ -33,24 +33,23 @@ if ($_SESSION['is_logged_in'] == false) {
 
     <?php require_once "./resources/views/header.php"; ?>
 
-    <div class="searchbar">
-        <label for="name">titel:</label>
-        <input type="text" placeholder="name" name="name" id="name">
-
-        <label for="department">afdeling:</label>
-        <select name="department" id="department">
-            <option disabled selected value="placeholder">Selecteer een optie</option>
-            <option value="Development">Development</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Cybersecurity">Cybersecurity</option>
-            <option value="Finance">Finance</option>
-            <option value="HR">HR</option>
-        </select>
-
-        <button name="create" id="create">create</button>
-    </div>
-
     <main class="container">
+        <div class="searchbar">
+            <label for="name">titel:</label>
+            <input type="text" placeholder="name" name="name" id="name">
+
+            <label for="department">afdeling:</label>
+            <select name="department" id="department">
+                <option disabled selected value="placeholder">Selecteer een optie</option>
+                <option value="Development">Development</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Finance">Finance</option>
+                <option value="HR">HR</option>
+            </select>
+
+            <button name="create" id="create">create</button>
+        </div>
         <div class="flex-container" id="columns">
             <div class="column">
                 <h2>To-do</h2>
