@@ -3,9 +3,10 @@ session_start();
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 global $conn, $base_url;
 $_SESSION[' error'] = "";
-echo $_POST['action'];
-echo "<br>";
 echo $_SESSION['action'];
+if(!isset($_POST['action'])){
+    $_POST['action'] = "";
+}
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     switch($_SESSION['action']??$_POST['action']) {
