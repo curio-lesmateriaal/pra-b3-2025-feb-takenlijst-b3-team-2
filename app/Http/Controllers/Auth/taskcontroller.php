@@ -54,7 +54,7 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             header('location: '.$base_url.'/takenlijst.php');
             break;
         case 'delete':
-            $task_id = $_SESSION['task_id'];
+            $id = $_SESSION['task_id'];
             $sql = "DELETE FROM taken WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
@@ -62,10 +62,9 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
                 header('location: '.$base_url.'/takenlijst.php');
                 exit();
             } else {
-                echo "Error deleting task.";
+                header('location: '.$base_url.'/takenlijst.php');
+                die("error while deleting.");
             }
-            header('location: '.$base_url.'/takenlijst.php');
-            break;
         case 'select':
             $user_id = $_SESSION['user_id'];
             if (empty($user_id)) {
