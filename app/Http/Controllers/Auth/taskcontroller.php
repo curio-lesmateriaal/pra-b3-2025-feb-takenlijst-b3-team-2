@@ -24,24 +24,25 @@ require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     switch($_POST['action']??$_SESSION['action']) {
         case 'create':
-            if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['afdeling'])) {
-                $_SESSION['error'] = 'Please fill out all fields.';
-                // header('location: '.$base_url.'/takenlijst.php');
-                break;
+            if(empty($_POST['title']) || empty($_POST['description']) || empty($_POST['department'])) {
+                die('Please fill out all fields.');
             }
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $afdeling = $_POST['afdeling'];
+            $title = $_POST['title']?? null;
+            $description = $_POST['description'] ?? null;
+            $afdeling = $_POST['department']?? null;
+            $deadline = $_POST['deadline'] ?? null;
+            $user_id = $_SESSION['user_id'] ?? null;
             $status = 'to-do';
-            $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status, user) VALUES (:title, :description, :afdeling, :status, :user_id)";
+            $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status,deadline, user) VALUES (:title, :description, :afdeling, :status,:deadline, :user_id)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
             $stmt->bindParam(':afdeling', $afdeling);
             $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':deadline', $deadline);
             $stmt->bindParam(':user_id', $user_id);
             if ($stmt->execute()) {
-                header('location: takenlijst.php');
+                header('location: '.$base_url.'/takenlijst.php');
                 $_SESSION['action'] = "";
                 break;
             } else {
