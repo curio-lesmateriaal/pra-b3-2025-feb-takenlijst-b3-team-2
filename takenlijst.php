@@ -1,7 +1,7 @@
 <?php
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
-$tasks = $_SESSION['tasks']?? [];
+$tasks = $_SESSION['tasks'] ?? [];
 $_SESSION['action'] = "select";
 require_once './config/config.php';
 
@@ -34,21 +34,23 @@ if ($_SESSION['is_logged_in'] == false) {
                 <ul class="taken">
                     <?php
                     $todo = array_filter($tasks, fn($task) => $task['status'] == 'to-do');
-
-                    foreach ($todo as $task) {
-                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
-                            "<div class=\"button-container\">
-                <button class=\"dropdown-button\">
-                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
-                </button>
-                <div class=\"dropdown-content\">
-                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
-                    <a href=\"remove.php?id=" . urlencode($task['id']) . "?action=delete" . "\" class=\"remove\">Remove</a>
-                </div>
-            </div>" .
-                            "</li>";
-                    }
-                    ?>
+                    foreach ($todo as $task):
+                        ?>
+                        <li><?php echo htmlspecialchars($task['titel']) ?>
+                            <div class="button-container">
+                                <button class="dropdown-button">
+                                    <img src="./resources/img/icons/menu.png" alt="Button Image">
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="edit.php?id=<?php echo urlencode($task['id']) ?>" class="edit">Edit</a>
+                                    <a href="remove.php?id=<?php echo urlencode($task['id']) ?>?action=delete"
+                                        class="remove">Remove</a>
+                                </div>
+                            </div>
+                            <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
+                            <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="column">
@@ -56,44 +58,48 @@ if ($_SESSION['is_logged_in'] == false) {
                 <ul class="taken">
                     <?php
                     $doing = array_filter($tasks, fn($task) => $task['status'] == 'doing');
-
-                    foreach ($doing as $task) {
-                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
-                            "<div class=\"button-container\">
-                <button class=\"dropdown-button\">
-                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
-                </button>
-                <div class=\"dropdown-content\">
-                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
-                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
-                </div>
-            </div>" .
-                            "</li>";
-                    }
-                    ?>
+                    foreach ($doing as $task):
+                        ?>
+                        <li><?php echo htmlspecialchars($task['titel']) ?>
+                            <div class="button-container">
+                                <button class="dropdown-button">
+                                    <img src="./resources/img/icons/menu.png" alt="Button Image">
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="edit.php?id=<?php echo urlencode($task['id']) ?>" class="edit">Edit</a>
+                                    <a href="remove.php?id=<?php echo urlencode($task['id']) ?>?action=delete"
+                                        class="remove">Remove</a>
+                                </div>
+                            </div>
+                            <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
+                            <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
-
             </div>
             <div class="column">
                 <h2>In-Review</h2>
                 <ul class="taken">
                     <?php
-                    $Review = array_filter($tasks, fn($task) => $task['status'] == 'review');
-
-                    foreach ($Review as $task) {
-                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
-                            "<div class=\"button-container\">
-                <button class=\"dropdown-button\">
-                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
-                </button>
-                <div class=\"dropdown-content\">
-                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
-                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
-                </div>
-            </div>" .
-                            "</li>";
-                    }
-                    ?>
+                    $review = array_filter($tasks, fn($task) => $task['status'] == 'review');
+                    foreach ($review as $task):
+                        ?>
+                        <li><?php echo htmlspecialchars($task['titel']) ?>
+                            <div class="button-container">
+                                <button class="dropdown-button">
+                                    <img src="./resources/img/icons/menu.png" alt="Button Image">
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="edit.php?id=<?php echo urlencode($task['id']) ?>" class="edit">Edit</a>
+                                    <a href="remove.php?id=<?php echo urlencode($task['id']) ?>?action=delete"
+                                        class="remove">Remove</a>
+                                </div>
+                            </div>
+                            <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
+                            <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                        </li>
+                        <li class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="column">
@@ -101,30 +107,29 @@ if ($_SESSION['is_logged_in'] == false) {
                 <ul class="taken">
                     <?php
                     $done = array_filter($tasks, fn($task) => $task['status'] == 'done');
-
-                    foreach ($done as $task) {
-                        echo "<li>" . htmlspecialchars($task['titel']) . " " .
-                            "<div class=\"button-container\">
-                <button class=\"dropdown-button\">
-                    <img src=\"./resources/img/icons/menu.png\" alt=\"Button Image\">
-                </button>
-                <div class=\"dropdown-content\">
-                    <a href=\"edit.php?id=" . urlencode($task['id']) . "\" class=\"edit\">Edit</a>
-                    <a href=\"remove.php?id=" . urlencode($task['id']) . "\" class=\"remove\">Remove</a>
-                </div>
-            </div>" .
-                            "</li>";
-                    }
-                    ?>
+                    foreach ($done as $task):
+                        ?>
+                        <li><?php echo htmlspecialchars($task['titel']) ?>
+                            <div class="button-container">
+                                <button class="dropdown-button">
+                                    <img src="./resources/img/icons/menu.png" alt="Button Image">
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="edit.php?id=<?php echo urlencode($task['id']) ?>" class="edit">Edit</a>
+                                    <a href="remove.php?id=<?php echo urlencode($task['id']) ?>?action=delete"
+                                        class="remove">Remove</a>
+                                </div>
+                            </div>
+                            <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
+                            <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
     </main>
-
     <?php require_once "./resources/views/footer.php"; ?>
-
 </body>
-
 <script src="resources/scripts/dropdown.js"></script>
 
 </html>

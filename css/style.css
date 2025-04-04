@@ -234,8 +234,21 @@ footer p {
     padding: 15px 10px;
     margin: 10px;
     background-color: #dbdada;
+    color: rgb(85, 85, 85);
     border: #d7d5d5 solid 1px;
     border-radius: 10%;
+}
+
+.department {
+    margin: 0 !important;
+    font-size: smaller;
+    color: rgb(158, 158, 158);
+}
+
+.deadline {
+    margin: 0 !important;
+    font-size: x-small;
+    color: #717171;
 }
 
 .container {
@@ -337,7 +350,7 @@ footer p {
 
 .create-border {
     background-color: #F5F3F5;
-    padding: 200px 300px;
+    padding: 180px 280px;
     border: #1a73e8 1px solid;
     border-radius: 10%;
     box-shadow: black 5px 0px 50px;
@@ -409,7 +422,7 @@ footer p {
 
 .edit-border {
     background-color: #F5F3F5;
-    padding: 200px 300px;
+    padding: 100px 200px;
     border: #1a73e8 1px solid;
     border-radius: 10%;
     box-shadow: black 5px 0px 50px;
