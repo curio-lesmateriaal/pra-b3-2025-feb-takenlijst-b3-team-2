@@ -37,7 +37,7 @@ if ($_SESSION['is_logged_in'] == false) {
     <main class="container">
         <div class="searchbar">
             <form action="./app/Http/Controllers/Auth/taskcontroller.php" method="post">
-                <input type="hidden" name="action" id="action" value="create">
+                <input type="hidden" name="action" value="filter">
                 <label for="title">titel:</label>
                 <input type="text" placeholder="title" name="title" id="name">
                 <label for="description">beschrijving:</label>
