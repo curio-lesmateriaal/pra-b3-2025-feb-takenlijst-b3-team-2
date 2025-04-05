@@ -160,6 +160,9 @@ if ($_SESSION['is_logged_in'] == false) {
                 </ul>
             </div>
         </div>
+        <div class="create-red">
+            <a href="./create.php">Create</a>
+        </div>
     </main>
     <?php require_once "./resources/views/footer.php"; ?>
 </body>
