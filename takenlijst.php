@@ -39,9 +39,9 @@ if ($_SESSION['is_logged_in'] == false) {
             <form action="./app/Http/Controllers/Auth/taskcontroller.php" method="post">
                 <input type="hidden" name="action" value="filter">
                 <label for="title">titel:</label>
-                <input type="text" placeholder="title" name="title" id="name">
+                <input type="text" placeholder="titel" name="title" id="name">
                 <label for="description">beschrijving:</label>
-                <input type="text" placeholder="description" name="description" id="description">
+                <input type="text" placeholder="beschrijving" name="description" id="description">
                 <label for="department">afdeling:</label>
                 <select name="department" id="department">
                     <option disabled selected value="placeholder">Selecteer een optie</option>
@@ -51,8 +51,7 @@ if ($_SESSION['is_logged_in'] == false) {
                     <option value="Finance">Finance</option>
                     <option value="HR">HR</option>
                 </select>
-                <input type="date" name="deadline" id="date" value="<?php echo $_SESSION['deadline']; ?>">
-                <button name="create" id="create">create</button>
+                <button name="filter" id="filter">filter</button>
             </form>
         </div>
         <div class="flex-container" id="columns">

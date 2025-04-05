@@ -14,12 +14,12 @@ if(!isset($_POST['action']) && !isset($_SESSION['action'])) {
 }
 $_SESSION[' error'] = "";
 
-echo $_SESSION['action'];
-echo "<br>";
-echo $user_id;
-echo "<br>";
-echo isset($_POST['action'])."|".isset($_SESSION['action']);
-echo "<br>";
+//echo $_SESSION['action'];
+//echo "<br>";
+//echo $user_id;
+//echo "<br>";
+//echo isset($_POST['action'])."|".isset($_SESSION['action']);
+//echo "<br>";
 require_once __DIR__ . '/../../../../config/conn.php';
 if(isset($_POST['action'])||isset($_SESSION['action'])) {
     switch($_POST['action']??$_SESSION['action']) {
