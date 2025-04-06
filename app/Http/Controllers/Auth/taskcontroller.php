@@ -82,24 +82,42 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             header('Location: ' . $base_url . '/takenlijst.php#user');
             $_SESSION['action'] = "select";
             break;
-        case 'delete':
-            "delete fired ";
-            $task_id = $_SESSION['task_id']?? null;
-            if($task_id == null) {
-                die("Error: please select a task to delete!");
-            }
-            $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':task_id', $task_id);
-            if ($stmt->execute()) {
-                $_SESSION['action'] = "";
-                header('location: '.$base_url.'/takenlijst.php');
+        case "delete":
+            // Verify task_id exists in session
+            $task_id = $_SESSION['task_id'] ?? null;
+            if ($task_id === null) {
+                $_SESSION['error'] = "Please select a valid task to delete!";
+                header('location: ' . $base_url . '/takenlijst.php');
                 exit();
-            } else {
-                echo "Error deleting task.";
             }
+
+            // Ensure user_id is available (you might want to add more validation)
+            if (!isset($user_id) || empty($user_id)) {
+                $_SESSION['error'] = "User authentication error!";
+                header('location: ' . $base_url . '/takenlijst.php#user');
+                exit();
+            }
+
+            try {
+                $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $stmt->bindParam(':task_id', $task_id, PDO::PARAM_INT);
+
+                if ($stmt->execute()) {
+                    $_SESSION['success'] = "Task deleted successfully!";
+                } else {
+                    $_SESSION['error'] = "Error deleting task.";
+                }
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Database error: " . $e->getMessage();
+            }
+
+            // Clear action and redirect
             $_SESSION['action'] = "";
+            header('location: ' . $base_url . '/takenlijst.php#user');
+            exit();
+
             break;
         case 'select':
             $user_id = $_SESSION['user_id'];
@@ -120,8 +138,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             }
 
             $task_id = $_SESSION['task_id'] ?? null;
-            if (!$task_id)
-            {
+            if (!$task_id) {
                 die("Error: Task ID not set!");
             }
 
@@ -139,47 +156,47 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             header('location: ' . $base_url . '/takenlijst.php');
             $_SESSION['action'] = "select";
             break;
-            case 'filter':
-                $user_id = $_SESSION['user_id'] ?? null;
-                $department = $_POST['department'] ?? '';
-                $title = $_POST['title'] ?? '';
-                $description = $_POST['description'] ?? '';
-            
-                if (empty($user_id)) {
-                    die("Error: please log in!");
-                }
-            
-                $query = "SELECT * FROM taken WHERE user = :user_id";
-                $params = [':user_id' => $user_id];
-            
-                if (!empty($department)) {
-                    $query .= " AND afdeling LIKE :department";
-                    $params[':department'] = "%" . $department . "%";
-                }
-            
-                if (!empty($title)) {
-                    $query .= " AND titel LIKE :title";
-                    $params[':title'] = "%" . $title . "%";
-                }
-            
-                if (!empty($description)) {
-                    $query .= " AND beschrijving LIKE :description";
-                    $params[':description'] = "%" . $description . "%";
-                }
-            
-                $stmt = $conn->prepare($query);
-                
-                // Bind all parameters
-                foreach ($params as $key => &$val) {
-                    $stmt->bindParam($key, $val);
-                }
-            
-                $stmt->execute();
-                $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION['tasks'] = $tasks;
-                $_SESSION['action'] = "";
-                header('location: ' . $base_url . '/takenlijst.php#user');
-                break;
+        case 'filter':
+            $user_id = $_SESSION['user_id'] ?? null;
+            $department = $_POST['department'] ?? '';
+            $title = $_POST['title'] ?? '';
+            $description = $_POST['description'] ?? '';
+
+            if (empty($user_id)) {
+                die("Error: please log in!");
+            }
+
+            $query = "SELECT * FROM taken WHERE user = :user_id";
+            $params = [':user_id' => $user_id];
+
+            if (!empty($department)) {
+                $query .= " AND afdeling LIKE :department";
+                $params[':department'] = "%" . $department . "%";
+            }
+
+            if (!empty($title)) {
+                $query .= " AND titel LIKE :title";
+                $params[':title'] = "%" . $title . "%";
+            }
+
+            if (!empty($description)) {
+                $query .= " AND beschrijving LIKE :description";
+                $params[':description'] = "%" . $description . "%";
+            }
+
+            $stmt = $conn->prepare($query);
+
+            // Bind all parameters
+            foreach ($params as $key => &$val) {
+                $stmt->bindParam($key, $val);
+            }
+
+            $stmt->execute();
+            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['tasks'] = $tasks;
+            $_SESSION['action'] = "";
+            header('location: ' . $base_url . '/takenlijst.php#user');
+            break;
         default:
             $_SESSION['action'] = "select";
 

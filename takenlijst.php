@@ -3,7 +3,7 @@ require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
 $tasks = $_SESSION['tasks'] ?? [];
 
-echo "session: ".$_SESSION['action'];
+// echo "session: ".$_SESSION['action'];
 if(isset($_POST['filter'])){
     $_SESSION['action'] = "filter";
 }else if(isset($_POST['reset'])){

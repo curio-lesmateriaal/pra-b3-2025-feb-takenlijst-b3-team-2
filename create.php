@@ -35,12 +35,12 @@ if ($_SESSION['is_logged_in'] == false) {
                     <textarea id="description" name="description" required></textarea>
                     <label for="afdeling">Afdeling:</label>
                     <select id="afdeling" name="department" required>
-                        <option value="development">Development</option>
-                        <option value="sales">Sales</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="cybersecurity">Cybersecurity</option>
-                        <option value="finance">Finance</option>
-                        <option value="it">IT</option>
+                        <option value="Development">Development</option>
+                        <!-- <option value="sales">Sales</option> -->
+                        <option value="Marketing">Marketing</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Finance">Finance</option>
+                        <option value="IT">IT</option>
                     </select>
                     <input type="date" id="deadline" name="deadline" required>
                     <input type="hidden" name="action" value="create">
