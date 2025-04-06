@@ -3,15 +3,14 @@ require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
 $tasks = $_SESSION['tasks'] ?? [];
 
-
+echo "session: ".$_SESSION['action'];
 if(isset($_POST['filter'])){
     $_SESSION['action'] = "filter";
 }else if(isset($_POST['reset'])){
-    $_SESSION['action'] = "reset";
+    $_SESSION['action'] = "select";
+}else{
+    $_SESSION['action'] = "select";
 }
-// else{
-//     $_SESSION['action'] = "select";
-// }
 require_once './config/config.php';
 
 if (!isset($_SESSION['is_logged_in'])) {

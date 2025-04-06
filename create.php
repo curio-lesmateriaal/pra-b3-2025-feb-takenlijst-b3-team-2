@@ -28,13 +28,13 @@ if ($_SESSION['is_logged_in'] == false) {
         <div class="create-box">
             <div class="create-border">
                 <h1>Create Task</h1>
-                <form class="create-form" action="create.php" method="POST">
+                <form class="create-form" action="app/Http/Controllers/Auth/taskcontroller.php" method="post">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
                     <label for="description">Description:</label>
                     <textarea id="description" name="description" required></textarea>
                     <label for="afdeling">Afdeling:</label>
-                    <select id="afdeling" name="afdeling" required>
+                    <select id="afdeling" name="department" required>
                         <option value="development">Development</option>
                         <option value="sales">Sales</option>
                         <option value="marketing">Marketing</option>
@@ -42,8 +42,10 @@ if ($_SESSION['is_logged_in'] == false) {
                         <option value="finance">Finance</option>
                         <option value="it">IT</option>
                     </select>
+                    <input type="date" id="deadline" name="deadline" required>
                     <input type="hidden" name="action" value="create">
                     <button type="submit">Create Task</button>
+                </form>
             </div>
         </div>
     </main>
