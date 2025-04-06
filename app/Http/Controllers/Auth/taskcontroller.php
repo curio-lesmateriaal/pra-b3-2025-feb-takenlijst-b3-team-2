@@ -24,33 +24,36 @@ require_once __DIR__ . '/../../../../config/conn.php';
 if (isset($_POST['action']) || isset($_SESSION['action'])) {
     switch ($_POST['action'] ?? $_SESSION['action']) {
         case 'create':
-            if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['department'])) {
-                die('Please fill out all fields.');
+            $user_id = $_SESSION['user_id'] ?? null;
+            if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['department'])|| empty($_POST['deadline'])) {
+                die("title".$_POST['title']."description".$_POST['description']."department".$_POST['department']);
             }
-            $title = $_POST['title'] ?? null;
+            if(empty($user_id)) {
+                die("Error: please log in!");
+            }
+            $title = $_POST['title'] ;
             $description = $_POST['description'] ?? null;
             $afdeling = $_POST['department'] ?? null;
             $deadline = $_POST['deadline'] ?? null;
-            $user_id = $_SESSION['user_id'] ?? null;
             $status = 'to-do';
-            $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status,deadline, user) VALUES (:title, :description, :afdeling, :status,:deadline, :user_id)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':title', $title);
-            $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':afdeling', $afdeling);
-            $stmt->bindParam(':status', $status);
-            $stmt->bindParam(':deadline', $deadline);
-            $stmt->bindParam(':user_id', $user_id);
-            if ($stmt->execute()) {
-                header('location: ' . $base_url . '/takenlijst.php');
-                $_SESSION['action'] = "";
-                break;
-            } else {
-                $_SESSION['error'] = 'Error creating task.';
-                header('location: ' . $base_url . '/takenlijst.php');
-                $_SESSION['action'] = "";
-                break;
+            try{
+                $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status,deadline, user) VALUES (:title, :description, :afdeling, :status,:deadline, :user_id)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':afdeling', $afdeling);
+                $stmt->bindParam(':status', $status);
+                $stmt->bindParam(':deadline', $deadline);
+                $stmt->bindParam(':user_id', $user_id);
+                if($stmt->execute()){
+                    header('location: ' . $base_url . '/takenlijst.php#user');
+                    $_SESSION['action'] = "select";
+                    exit();
+                }                
+            }catch (PDOException $e) {
+                die("Error: " . $e->getMessage());
             }
+
         case 'update':
             echo "update fired ";
             $title = isset($_POST["title"]) ? $_POST["title"] : null;
@@ -74,12 +77,12 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $stmt->execute();
             echo "Task updated successfully!";
             header('Location: ' . $base_url . '/takenlijst.php');
-            $_SESSION['action'] = "";
+            $_SESSION['action'] = "select";
             break;
         case 'delete':
             "delete fired ";
-            $task_id = $_SESSION['task_id'] ?? null;
-            if ($task_id == null) {
+            $task_id = $_SESSION['task_id']?? null;
+            if($task_id == null) {
                 die("Error: please select a task to delete!");
             }
             $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
@@ -88,7 +91,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $stmt->bindParam(':task_id', $task_id);
             if ($stmt->execute()) {
                 $_SESSION['action'] = "";
-                header('location: ' . $base_url . '/takenlijst.php');
+                header('location: '.$base_url.'/takenlijst.php');
                 exit();
             } else {
                 echo "Error deleting task.";
@@ -106,7 +109,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $stmt->execute();
             $tasks = $stmt->fetchall(PDO::FETCH_ASSOC);
             $_SESSION['tasks'] = $tasks;
-            $_SESSION['action'] = "";
+            $_SESSION['action'] = "select";
             break;
         case 'edit':
             if ($_POST['action'] == "update") {
@@ -124,49 +127,49 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $_SESSION['department'] = !empty($tasks['afdeling']) ? $tasks['afdeling'] : '';
             $_SESSION['deadline'] = !empty($tasks['deadline']) ? $tasks['deadline'] : '';
             header('location: ' . $base_url . '/takenlijst.php');
-            $_SESSION['action'] = "";
+            $_SESSION['action'] = "select";
             break;
-            case 'filter':
-                $user_id = $_SESSION['user_id'] ?? null;
-                $department = $_POST['department'] ?? '';
-                $title = $_POST['title'] ?? '';
-                $description = $_POST['description'] ?? '';
-            
-                if (empty($user_id)) {
-                    die("Error: please log in!");
-                }
-            
-                $query = "SELECT * FROM taken WHERE user = :user_id";
-                $params = [':user_id' => $user_id];
-            
-                if (!empty($department)) {
-                    $query .= " AND afdeling LIKE :department";
-                    $params[':department'] = "%" . $department . "%";
-                }
-            
-                if (!empty($title)) {
-                    $query .= " AND titel LIKE :title";
-                    $params[':title'] = "%" . $title . "%";
-                }
-            
-                if (!empty($description)) {
-                    $query .= " AND beschrijving LIKE :description";
-                    $params[':description'] = "%" . $description . "%";
-                }
-            
-                $stmt = $conn->prepare($query);
-                
-                // Bind all parameters
-                foreach ($params as $key => &$val) {
-                    $stmt->bindParam($key, $val);
-                }
-            
-                $stmt->execute();
-                $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION['tasks'] = $tasks;
-                $_SESSION['action'] = "";
-                header('location: ' . $base_url . '/takenlijst.php#user');
-                break;
+        case 'filter':
+            $user_id = $_SESSION['user_id'] ?? null;
+            $department = $_POST['department'] ?? '';
+            $title = $_POST['title'] ?? '';
+            $description = $_POST['description'] ?? '';
+
+            if (empty($user_id)) {
+                die("Error: please log in!");
+            }
+
+            $query = "SELECT * FROM taken WHERE user = :user_id";
+            $params = [':user_id' => $user_id];
+
+            if (!empty($department)) {
+                $query .= " AND afdeling LIKE :department";
+                $params[':department'] = "%" . $department . "%";
+            }
+
+            if (!empty($title)) {
+                $query .= " AND titel LIKE :title";
+                $params[':title'] = "%" . $title . "%";
+            }
+
+            if (!empty($description)) {
+                $query .= " AND beschrijving LIKE :description";
+                $params[':description'] = "%" . $description . "%";
+            }
+
+            $stmt = $conn->prepare($query);
+
+            // Bind all parameters
+            foreach ($params as $key => &$val) {
+                $stmt->bindParam($key, $val);
+            }
+
+            $stmt->execute();
+            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['tasks'] = $tasks;
+            $_SESSION['action'] = "";
+            header('location: ' . $base_url . '/takenlijst.php#user');
+            break;
     }
 }
 $_SESSION['action'] = "";
