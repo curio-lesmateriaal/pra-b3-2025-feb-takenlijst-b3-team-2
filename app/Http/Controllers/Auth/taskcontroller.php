@@ -50,6 +50,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
                     $_SESSION['action'] = "select";
                     exit();
                 }
+                break;
             }catch (PDOException $e) {
                 die("Error: " . $e->getMessage());
             }
@@ -64,6 +65,12 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
 
             if ($title == null || $content == null || $department == null || $status == null || $deadline == null) {
                 die("Error: please fill out the form!");
+            }
+
+            $task_id = $_SESSION['task_id'] ?? null;
+            if (!$task_id)
+            {
+                die("Error: Task ID not set!");
             }
 
             $sql = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
@@ -85,6 +92,14 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             if($task_id == null) {
                 die("Error: please select a task to delete!");
             }
+
+            $task_id = $_SESSION['task_id'] ?? null;
+            if (!$task_id)
+            {
+                die("Error: Task ID not set!");
+            }
+
+
             $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':user_id', $user_id);
@@ -115,6 +130,13 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             if ($_POST['action'] == "update") {
                 break;
             }
+
+            $task_id = $_SESSION['task_id'] ?? null;
+            if (!$task_id)
+            {
+                die("Error: Task ID not set!");
+            }
+
             $sql = "SELECT * FROM taken WHERE id = :task_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':task_id', $_SESSION['task_id']);
