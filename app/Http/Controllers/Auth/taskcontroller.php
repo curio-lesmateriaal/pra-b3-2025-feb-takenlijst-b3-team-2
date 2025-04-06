@@ -13,9 +13,8 @@ if (!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
-print_r($_SESSION['tasks']);
-echo "<br>";
-echo "session ". $_SESSION['action'];
+
+//echo $_SESSION['action'];
 //echo "<br>";
 //echo $user_id;
 //echo "<br>";
@@ -127,45 +126,47 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             header('location: ' . $base_url . '/takenlijst.php');
             $_SESSION['action'] = "";
             break;
-        case 'filter':
-            $user_id = $_SESSION['user_id'] ?? null;
-            if (empty($user_id)) {
-                die("Error: please log in!");
-            }
+            case 'filter':
+                $user_id = $_SESSION['user_id'] ?? null;
+                $department = $_POST['department'] ?? '';
+                $title = $_POST['title'] ?? '';
+                $description = $_POST['description'] ?? '';
             
-            $title = $_POST['title'] ?? null;
-            $description = $_POST['description'] ?? null;
-            $department = $_POST['department'] ?? null;
+                if (empty($user_id)) {
+                    die("Error: please log in!");
+                }
             
-            if (empty($title) && empty($description) && empty($department)) {
-                $_SESSION['action'] = "select";
-                header('Location: ' . $base_url . '/takenlijst.php');
-                exit();
-            }
+                $query = "SELECT * FROM taken WHERE user = :user_id";
+                $params = [':user_id' => $user_id];
             
-            $query = "SELECT * FROM taken WHERE user = :user_id";
-            echo $query;
-
-            if (!empty($department)) {
-                $query .= " AND afdeling LIKE :department";
-                $params[':department'] = "%$department%";
-            }
-            $stmt = $conn->prepare($query);
-            foreach ($params as $key => $val) {
-                $stmt->bindValue($key, $val);
-            }
+                if (!empty($department)) {
+                    $query .= " AND afdeling LIKE :department";
+                    $params[':department'] = "%" . $department . "%";
+                }
             
-            $stmt->execute();
-            $tasks = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['tasks'] = $tasks;
-            $_SESSION['action'] = "";
-            header('location: ' . $base_url . '/takenlijst.php#user');
-            break;
-
-        default:
-            $_SESSION['action'] = null;
-            $_SESSION['error'] = 'Invalid action';
-            break;
+                if (!empty($title)) {
+                    $query .= " AND titel LIKE :title";
+                    $params[':title'] = "%" . $title . "%";
+                }
+            
+                if (!empty($description)) {
+                    $query .= " AND beschrijving LIKE :description";
+                    $params[':description'] = "%" . $description . "%";
+                }
+            
+                $stmt = $conn->prepare($query);
+                
+                // Bind all parameters
+                foreach ($params as $key => &$val) {
+                    $stmt->bindParam($key, $val);
+                }
+            
+                $stmt->execute();
+                $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $_SESSION['tasks'] = $tasks;
+                $_SESSION['action'] = "";
+                header('location: ' . $base_url . '/takenlijst.php#user');
+                break;
     }
 }
 $_SESSION['action'] = "";
