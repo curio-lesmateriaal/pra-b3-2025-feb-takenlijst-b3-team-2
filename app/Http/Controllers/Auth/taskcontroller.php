@@ -61,7 +61,8 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $content = isset($_POST["content"]) ? $_POST["content"] : null;
             $department = isset($_POST["department"]) ? $_POST["department"] : null;
             $status = isset($_POST["status"]) ? $_POST["status"] : null;
-            $deadline = isset($_POST["date"]) ? $_POST["date"] : null;
+            $deadline = $_POST["deadline"] ?? null;
+
 
             if ($title == null || $content == null || $department == null || $status == null || $deadline == null) {
                 die("Error: please fill out the form!");
@@ -88,17 +89,10 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             break;
         case 'delete':
             echo "delete fired ";
-            $task_id = $_SESSION['task_id']?? null;
-            if($task_id == null) {
-                die("Error: please select a task to delete!");
-            }
-
             $task_id = $_SESSION['task_id'] ?? null;
-            if (!$task_id)
-            {
+            if (!$task_id) {
                 die("Error: Task ID not set!");
             }
-
 
             $sql = "DELETE FROM taken WHERE id = :task_id AND user = :user_id";
             $stmt = $conn->prepare($sql);
