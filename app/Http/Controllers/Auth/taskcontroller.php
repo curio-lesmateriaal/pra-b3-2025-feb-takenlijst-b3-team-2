@@ -13,8 +13,9 @@ if(!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_POST['action'] = "";
 }
 $_SESSION[' error'] = "";
-
-//echo $_SESSION['action'];
+print_r($_SESSION['tasks']);
+echo "<br>";
+echo "session ". $_SESSION['action'];
 //echo "<br>";
 //echo $user_id;
 //echo "<br>";
@@ -129,31 +130,47 @@ if(isset($_POST['action'])||isset($_SESSION['action'])) {
             break;
         case 'filter':
             $user_id = $_SESSION['user_id'] ?? null;
-            $department = $_POST['department'] ?? '';
-
             if (empty($user_id)) {
                 die("Error: please log in!");
             }
-
+            
+            $title = $_POST['title'] ?? null;
+            $description = $_POST['description'] ?? null;
+            $department = $_POST['department'] ?? null;
+            
+            if (empty($title) && empty($description) && empty($department)) {
+                $_SESSION['action'] = "select";
+                header('Location: ' . $base_url . '/takenlijst.php');
+                exit();
+            }
+            
             $query = "SELECT * FROM taken WHERE user = :user_id";
-
+            $params = [':user_id' => $user_id];
+            
+            if (!empty($title)) {
+                $query .= " AND titel LIKE :title";
+                $params[':title'] = "%$title%";
+            }
+            if (!empty($description)) {
+                $query .= " AND beschrijving LIKE :description";
+                $params[':description'] = "%$description%";
+            }
             if (!empty($department)) {
                 $query .= " AND afdeling LIKE :department";
+                $params[':department'] = "%$department%";
             }
-
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
-
-            if (!empty($department)) {
-                $likeDepartment = "%" . $department . "%";
-                $stmt->bindParam(':department', $likeDepartment);
+            foreach ($params as $key => $val) {
+                $stmt->bindValue($key, $val);
             }
-
+            
             $stmt->execute();
-            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tasks = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['tasks'] = $tasks;
-            $_SESSION['action'] = "";
-            break;
+            $_SESSION['action'] = "filter";
+            $_SESSION['is_filtered'] = true;
+            header('Location: ' . $base_url . '/takenlijst.php');
+            exit();
 
         default:
             $_SESSION['action'] = null;

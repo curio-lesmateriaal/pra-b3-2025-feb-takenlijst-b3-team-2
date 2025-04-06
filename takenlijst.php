@@ -2,8 +2,16 @@
 require_once "./app/Http/Controllers/Auth/taskcontroller.php";
 global $base_url, $tasks;
 $tasks = $_SESSION['tasks'] ?? [];
-$_SESSION['action'] = "select";
 
+
+if(isset($_POST['filter'])){
+    $_SESSION['action'] = "filter";
+}else if(isset($_POST['reset'])){
+    $_SESSION['action'] = "reset";
+}
+// else{
+//     $_SESSION['action'] = "select";
+// }
 require_once './config/config.php';
 
 if (!isset($_SESSION['is_logged_in'])) {
@@ -51,7 +59,8 @@ if ($_SESSION['is_logged_in'] == false) {
                     <option value="Finance">Finance</option>
                     <option value="HR">HR</option>
                 </select>
-                <button name="filter" id="filter">filter</button>
+                <button name="filter" type = "submit" id="filter">filter</button>
+                <button name="reset" type = "submit" id="reset">reset</button>
             </form>
         </div>
         <div class="flex-container" id="columns">
