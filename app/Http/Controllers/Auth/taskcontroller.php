@@ -38,7 +38,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $afdeling = $_POST['department'] ?? null;
             $deadline = $_POST['deadline'] ?? null;
             $status = 'to-do';
-            $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status,deadline, user) VALUES (:title, :description, :afdeling, :status,:deadline, :user_id)";
+            $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status, deadline, `user`) VALUES (:title, :description, :afdeling, :status, :deadline, :user_id)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
