@@ -63,6 +63,9 @@ if ($_SESSION['is_logged_in'] == false) {
                 <button name="reset" type = "submit" id="reset">reset</button>
             </form>
         </div>
+        <div class="create-red">
+            <a href="./create.php">Create</a>
+        </div>
         <div class="flex-container" id="columns">
             <div class="column">
                 <h2>To-do</h2>
@@ -85,7 +88,6 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
-                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -111,7 +113,6 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
-                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -137,7 +138,6 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
-                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -163,14 +163,10 @@ if ($_SESSION['is_logged_in'] == false) {
                             <p class="description"><?php echo htmlspecialchars($task["beschrijving"]) ?></p>
                             <p class="department">Department: <?php echo htmlspecialchars($task["afdeling"]) ?></p>
                             <p class="deadline">Deadline: <?php echo htmlspecialchars($task["deadline"]) ?></p>
-                            <p class="department"><?php echo htmlspecialchars($task["afdeling"]) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-        </div>
-        <div class="create-red">
-            <a href="./create.php">Create</a>
         </div>
     </main>
     <?php require_once "./resources/views/footer.php"; ?>
