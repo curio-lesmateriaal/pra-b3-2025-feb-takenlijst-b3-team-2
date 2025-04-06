@@ -80,7 +80,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $_SESSION['action'] = "select";
             break;
         case 'delete':
-            "delete fired ";
+            echo "delete fired ";
             $task_id = $_SESSION['task_id']?? null;
             if($task_id == null) {
                 die("Error: please select a task to delete!");
