@@ -12,7 +12,7 @@ if (!isset($_POST['action']) && !isset($_SESSION['action'])) {
     $_SESSION['action'] = "";
     $_POST['action'] = "";
 }
-$_SESSION[' error'] = "";
+$_SESSION['error'] = "";
 
 //echo $_SESSION['action'];
 //echo "<br>";
@@ -49,7 +49,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
                     header('location: ' . $base_url . '/takenlijst.php#user');
                     $_SESSION['action'] = "select";
                     exit();
-                }                
+                }
             }catch (PDOException $e) {
                 die("Error: " . $e->getMessage());
             }
