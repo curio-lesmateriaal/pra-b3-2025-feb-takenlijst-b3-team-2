@@ -6,23 +6,17 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST['action'])) {
     $_SESSION['action'] = $_POST['action'];
 }
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$user_id = $_SESSION['user_id'] ?? null;
 global $conn, $base_url;
-if (!isset($_POST['action']) && !isset($_SESSION['action'])) {
-    $_SESSION['action'] = "";
-    $_POST['action'] = "";
-}
+
+$action = $_POST['action'] ?? $_SESSION['action'] ?? '';
+$_SESSION['action'] = $action;
+
 $_SESSION['error'] = "";
 
-//echo $_SESSION['action'];
-//echo "<br>";
-//echo $user_id;
-//echo "<br>";
-//echo isset($_POST['action'])."|".isset($_SESSION['action']);
-//echo "<br>";
 require_once __DIR__ . '/../../../../config/conn.php';
 if (isset($_POST['action']) || isset($_SESSION['action'])) {
-    switch ($_POST['action'] ?? $_SESSION['action']) {
+    switch ($action) {
         case 'create':
             $user_id = $_SESSION['user_id'] ?? null;
             if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['department'])|| empty($_POST['deadline'])) {
@@ -32,9 +26,9 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
                 die("Error: please log in!");
             }
             $title = $_POST['title'] ;
-            $description = $_POST['description'] ?? null;
-            $afdeling = $_POST['department'] ?? null;
-            $deadline = $_POST['deadline'] ?? null;
+            $description = $_POST['description'];
+            $afdeling = $_POST['department'];
+            $deadline = $_POST['deadline'];
             $status = 'to-do';
             try{
                 $sql = "INSERT INTO taken (titel, beschrijving, afdeling, status,deadline, user) VALUES (:title, :description, :afdeling, :status,:deadline, :user_id)";
@@ -57,10 +51,10 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
 
         case 'update':
             echo "update fired ";
-            $title = isset($_POST["title"]) ? $_POST["title"] : null;
-            $content = isset($_POST["content"]) ? $_POST["content"] : null;
-            $department = isset($_POST["department"]) ? $_POST["department"] : null;
-            $status = isset($_POST["status"]) ? $_POST["status"] : null;
+            $title = $_POST["title"] ?? null;
+            $content = $_POST["content"] ?? null;
+            $department = $_POST["department"] ?? null;
+            $status = $_POST["status"] ?? null;
             $deadline = $_POST["deadline"] ?? null;
 
 
@@ -121,7 +115,7 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $_SESSION['action'] = "select";
             break;
         case 'edit':
-            if ($_POST['action'] == "update") {
+            if ($_POST['action'] ?? '' === "update") {
                 break;
             }
 
@@ -186,6 +180,9 @@ if (isset($_POST['action']) || isset($_SESSION['action'])) {
             $_SESSION['action'] = "";
             header('location: ' . $base_url . '/takenlijst.php#user');
             break;
+
+        default:
+            die("Unknown action: $action");
+
     }
 }
-$_SESSION['action'] = "";
